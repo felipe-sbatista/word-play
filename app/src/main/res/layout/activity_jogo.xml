@@ -387,9 +387,21 @@
             android:layout_height="40dp"
             android:layout_marginTop="50dp"
             android:layout_marginLeft="547dp"
-            app:srcCompat="@android:drawable/ic_media_play" />
+            app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />
+            <!--app:srcCompat="@android:drawable/ic_media_play" />-->
 
 
     </android.support.v7.widget.CardView>
+
+    <ImageView
+        android:id="@+id/botaoVoltar"
+        android:layout_width="77dp"
+        android:layout_height="86dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_revert" />
+
 
 </android.support.constraint.ConstraintLayout>

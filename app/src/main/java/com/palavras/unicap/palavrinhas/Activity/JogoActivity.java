@@ -1,11 +1,16 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.media.MediaPlayer;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.transition.Explode;
+import android.transition.Transition;
+import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -32,11 +37,14 @@ public class JogoActivity extends AppCompatActivity{
     private Button botaoConfirmar , botaoLimpar, botaoTocar;
     private TextView palavraEmTela, textUsuario;
     private TextToSpeech textToSpeech;
-    private ImageView botaoPlay;
+    private ImageView botaoPlay, botaoVoltar;
+    private MediaPlayer player;
 
-    String palavraUsuario = "";
-    String palavraAtual = "";
+    private String palavraUsuario = "";
+    private String palavraAtual = "";
     private List<Palavra> palavras = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +57,8 @@ public class JogoActivity extends AppCompatActivity{
         setBotoes();
         //escolher a primeira palavra
         selectPalavra();
+
+        player = MediaPlayer.create(this, R.raw.success);
     }
 
 
@@ -62,6 +72,7 @@ public class JogoActivity extends AppCompatActivity{
                     toast.show();
                     limparPalavra();
                 }else{
+                    player.start();
                     selectPalavra();
                 }
             }
@@ -70,7 +81,7 @@ public class JogoActivity extends AppCompatActivity{
         botaoLimpar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               limparPalavra();
+                limparPalavra();
             }
         });
 
@@ -91,13 +102,23 @@ public class JogoActivity extends AppCompatActivity{
                 textToSpeech.speak(palavraAtual,TextToSpeech.QUEUE_FLUSH,null);
             }
         });
+
+        botaoVoltar = findViewById(R.id.botaoVoltar);
+        botaoVoltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(JogoActivity.this, MainActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                finish();
+            }
+        });
     }
 
     private void limparPalavra(){
         palavraUsuario = "";
         palavraEmTela.setText(palavraUsuario);
     }
-
 
     public void getClick(View view) {
         Button botao = findViewById(view.getId());
@@ -130,7 +151,4 @@ public class JogoActivity extends AppCompatActivity{
         dao.closeConnection();
     }
 
-    public void playSound(Palavra palavra){
-        MediaPlayer mediaPlayer;
-    }
 }
