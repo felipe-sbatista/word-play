@@ -349,7 +349,7 @@
             android:layout_height="45dp"
             android:text=""
             android:layout_marginLeft="228dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="140dp"
             android:textSize="32sp"
             />
 
@@ -402,6 +402,39 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
+
+    <ImageView
+        android:id="@+id/vida1"
+        android:layout_width="49dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toEndOf="@+id/buttonF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coracao_icon" />
+
+    <ImageView
+        android:id="@+id/vida2"
+        android:layout_width="49dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/buttonX"
+        app:layout_constraintTop_toBottomOf="@+id/vida3"
+        app:srcCompat="@drawable/coracao_icon" />
+
+    <ImageView
+        android:id="@+id/vida3"
+        android:layout_width="49dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/buttonR"
+        app:layout_constraintTop_toBottomOf="@+id/vida1"
+        app:srcCompat="@drawable/coracao_icon" />
 
 
 </android.support.constraint.ConstraintLayout>
