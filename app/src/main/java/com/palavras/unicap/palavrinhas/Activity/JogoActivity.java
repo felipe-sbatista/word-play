@@ -1,13 +1,15 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,14 +29,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 public class JogoActivity extends AppCompatActivity{
 
-    private Button botaoConfirmar, botaoLimpar, botaoTocar;
+    private Button botaoConfirmar, botaoLimpar;
     private TextView palavraEmTela, textUsuario;
     private TextToSpeech textToSpeech;
     private ImageView botaoPlay, botaoVoltar;
@@ -44,10 +41,8 @@ public class JogoActivity extends AppCompatActivity{
     private String palavraUsuario = "";
     private Palavra palavraAtual;
     private List<Palavra> palavras = new ArrayList<>();
-    private Usuario jogador;
     private Pontuacao pontuacaoAtual;
     private List<String> vidas = new ArrayList(Arrays.asList("vida1","vida2", "vida3"));
-
 
 
     @Override
@@ -55,17 +50,44 @@ public class JogoActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
 
-        this.jogador = new Usuario();
         this.pontuacaoAtual = new Pontuacao();
         this.pontuacaoAtual.setPontos(0);
 
         //recebe o acesso ao banco vindo da outra view
-        this.database = (AppDatabase) getIntent().getSerializableExtra("DbAccess");
+        //this.database = (AppDatabase) getIntent().getSerializableExtra("DbAccess");
+        // final DatabaseCopier copier = DatabaseCopier.getInstance(getApplicationContext());
+        // database = copier.getRoomDatabase();
+        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "palavras.db").build();
+
+
+
 
         palavraEmTela = findViewById(R.id.palavra);
 
         //listar palavras atraves do DAO
-        buscarPalavras();
+
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... voids) {
+                palavras = database.palavraDAO().loadAllPalavras();
+                if(palavras.size()==0){
+                    Log.d("ERRO", "ERRO DE SQL NA BUSCA");
+                    Intent intent = new Intent(JogoActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                    finish();
+                }
+                return null;
+            }
+        }.execute();
+        Thread t = Thread.currentThread();
+        try {
+            synchronized (t){
+                t.wait(500);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //configurar os botoes para pegar o onClick do confirmar e limpar
         setBotoes();
@@ -80,14 +102,6 @@ public class JogoActivity extends AppCompatActivity{
 
     // <Operacoes de jogabilidade>
 
-    public void buscarPalavras(){
-        new Runnable() {
-            @Override
-            public void run() {
-                palavras = database.palavraDAO().loadAllPalavras();
-            }
-        };
-    }
 
     private void limparPalavra(){
         palavraUsuario = "";
@@ -95,11 +109,11 @@ public class JogoActivity extends AppCompatActivity{
     }
 
     private void selectPalavra(){
-        Random random = new Random();
-        int posicao = random.nextInt(palavras.size());
-        if(posicao == 0){ // fim de jogo
+        if(palavras.size() == 0){ // fim de jogo
             encerrarPartida("Parabéns!");
         }
+        Random random = new Random();
+        int posicao = random.nextInt(palavras.size());
         Palavra palavra = palavras.get(posicao);
         palavras.remove(posicao);
         palavraAtual = palavra;
@@ -109,7 +123,6 @@ public class JogoActivity extends AppCompatActivity{
     private void encerrarPartida(String mensagem) {
         Intent intent = new Intent(JogoActivity.this, RegistrarActivity.class);
         intent.putExtra("Pontuacao", pontuacaoAtual);
-        intent.putExtra("DbAccess", database);
         intent.putExtra("Mensagem", mensagem);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
@@ -126,7 +139,7 @@ public class JogoActivity extends AppCompatActivity{
     public void setBotoes(){
         botaoConfirmar = findViewById(R.id.botaoConfirmar);
         botaoConfirmar.setOnClickListener(v -> {
-            if(!palavraAtual.getTexto().equals(palavraUsuario)){
+            if(!this.palavraAtual.getTexto().toUpperCase().equals(this.palavraUsuario.toUpperCase())){
                 Toast toast = Toast.makeText(JogoActivity.this, "Palavra errada!", Toast.LENGTH_SHORT);
                 toast.show();
                 reduzirVida(vidas.get(vidas.size()-1));
@@ -134,13 +147,13 @@ public class JogoActivity extends AppCompatActivity{
                 if(vidas.size() == 0 ){
                     encerrarPartida("Muito bem! Continue Tentando!");
                 }
-                limparPalavra();
             }else{
                 this.pontuacaoAtual.setPontos(pontuacaoAtual.getPontos()+1);
                 //tocar som de acerto
                 player.start();
                 selectPalavra();
             }
+            limparPalavra();
         });
         botaoLimpar = findViewById(R.id.limpar);
         botaoLimpar.setOnClickListener(v -> limparPalavra());
@@ -148,7 +161,7 @@ public class JogoActivity extends AppCompatActivity{
         textToSpeech = new TextToSpeech(getApplicationContext(), status -> {
             if(status != TextToSpeech.ERROR){
                 textToSpeech.setLanguage(new Locale("pt", "POR"));
-                textToSpeech.setSpeechRate((float) 0.7);
+                textToSpeech.setSpeechRate((float) 0.5);
             }
         });
 
@@ -164,8 +177,6 @@ public class JogoActivity extends AppCompatActivity{
             finish();
         });
     }
-
-
 
     public void getClick(View view) {
         Button botao = findViewById(view.getId());

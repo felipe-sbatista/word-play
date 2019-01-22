@@ -4,11 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 @Entity(tableName = "Palavra")
 public class Palavra {
 
@@ -24,4 +20,36 @@ public class Palavra {
     @ColumnInfo(name = "som")
     private byte[] som;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public byte[] getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
+    }
+
+    public byte[] getSom() {
+        return som;
+    }
+
+    public void setSom(byte[] som) {
+        this.som = som;
+    }
 }

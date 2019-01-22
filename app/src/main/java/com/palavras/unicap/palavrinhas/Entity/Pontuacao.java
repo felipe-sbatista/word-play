@@ -8,11 +8,6 @@ import android.arch.persistence.room.PrimaryKey;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity(tableName = "pontuacao", foreignKeys = @ForeignKey(entity = Usuario.class, parentColumns = "Id", childColumns = "usuario"))
 public class Pontuacao implements Serializable {
 
@@ -31,4 +26,45 @@ public class Pontuacao implements Serializable {
 
     @Ignore
     private Usuario usuario;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getPontos() {
+        return pontos;
+    }
+
+    public void setPontos(int pontos) {
+        this.pontos = pontos;
+    }
+
+    public int getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(int usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }

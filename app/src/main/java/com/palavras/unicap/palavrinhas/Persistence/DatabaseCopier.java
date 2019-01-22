@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class DatabaseCopier {
     private static final String TAG = DatabaseCopier.class.getSimpleName();
 
-    private static final String DATABASE_NAME = "testeDB.db";
+    private static final String DATABASE_NAME = "palavras.db";
 
     private AppDatabase mAppDataBase;
 
@@ -35,8 +35,8 @@ public class DatabaseCopier {
         copyAttachedDatabase(appContext, DATABASE_NAME);
         mAppDataBase = Room.databaseBuilder(appContext,
                 AppDatabase.class, DATABASE_NAME)
-               // .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_1_2)
+                .allowMainThreadQueries()
+                .addMigrations(AppDatabase.MIGRATION_2_3)
                 .build();
     }
 

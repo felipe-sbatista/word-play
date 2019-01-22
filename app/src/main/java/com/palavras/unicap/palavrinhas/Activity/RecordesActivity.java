@@ -1,5 +1,7 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
+import android.arch.persistence.room.Room;
+import android.os.AsyncTask;
 import android.support.constraint.ConstraintLayout;
 import android.support.constraint.ConstraintSet;
 import android.support.v7.app.AppCompatActivity;
@@ -9,35 +11,56 @@ import android.widget.TextView;
 import com.palavras.unicap.palavrinhas.Entity.Pontuacao;
 import com.palavras.unicap.palavrinhas.Entity.Usuario;
 import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
+import com.palavras.unicap.palavrinhas.Persistence.DatabaseCopier;
 import com.palavras.unicap.palavrinhas.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+
 public class RecordesActivity extends AppCompatActivity {
 
     private AppDatabase database;
     private List<Pontuacao> pontuacoes;
-    private List<Usuario> usuarios;
-    private Map<Long, Usuario> mapUsuarios;
+    private Map<Long, Usuario> usuarios;
+    private int[] ids;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordes);
-        database = (AppDatabase) getIntent().getSerializableExtra("DbAccess");
+        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "palavras.db").build();
 
         ConstraintLayout layout = findViewById(R.id.layout);
 
-        getResultados();
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                pontuacoes = database.pontuacaoDAO().listTop10();
+                Set<Integer> set = getIds();
+                Integer[] a = set.stream().toArray(Integer[]::new);
+                ids = Arrays.stream(a).mapToInt(Integer::intValue).toArray();
+                List<Usuario> list;
+                list = database.usuarioDAO().findByIds(ids);
+                usuarios = list.stream().collect(Collectors.toMap(Usuario::getId, item -> item));
+                return null;
+            }
+        }.execute();
+        Thread t = Thread.currentThread();
+        try {
+            synchronized (t){
+                t.wait(500);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        setPontos();
 
         adicionarPontuacoes(layout);
 
@@ -58,31 +81,20 @@ public class RecordesActivity extends AppCompatActivity {
     }
 
 
-    private void getResultados(){
-        new Runnable(){
-            @Override
-            public void run() {
-                pontuacoes = database.pontuacaoDAO().listTop10();
-                int [] ids = getIds(pontuacoes);
-                usuarios = database.usuarioDAO().findByIds(ids);
-                 mapUsuarios = usuarios.stream().collect(Collectors.toMap(Usuario::getId, item->item));
-                setPontos(mapUsuarios, pontuacoes);
-            }
-        };
-    }
-
-    private void setPontos(Map<Long, Usuario> usuarios, List<Pontuacao> pontuacoes) {
+    private void setPontos() {
         for(Pontuacao p:pontuacoes){
             p.setUsuario(usuarios.get(p.getUsuarioId()));
         }
     }
 
-
-    private int [] getIds(List<Pontuacao> pontuacoes){
-        int ids [] = new int [pontuacoes.size()];
-        for(int i = 0; i<pontuacoes.size(); i++){
-            ids[i] = pontuacoes.get(i).getUsuarioId();
+    private Set<Integer> getIds(){
+        Set<Integer> set = new HashSet<>();
+        for (Pontuacao p: pontuacoes){
+            set.add(p.getUsuarioId());
         }
-        return ids;
+        return set;
     }
+
+
+
 }
