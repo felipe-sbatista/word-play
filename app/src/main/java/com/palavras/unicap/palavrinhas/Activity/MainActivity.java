@@ -1,22 +1,15 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
-import com.palavras.unicap.palavrinhas.Entity.Palavra;
 import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
-import com.palavras.unicap.palavrinhas.Persistence.DatabaseCopier;
 import com.palavras.unicap.palavrinhas.R;
-
-import java.io.Serializable;
-import java.util.List;
+import com.palavras.unicap.palavrinhas.Viewmodel.MainViewModel;
 
 import butterknife.BindView;
 import butterknife.OnItemClick;
@@ -28,31 +21,23 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.botao_recordes)
     Button botaoRecorde;
     private Boolean firstTime = null;
+
     private static AppDatabase database;
+
+    private MainViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        viewModel = new MainViewModel(getApplication());
         if(isFirstTime()){
-            //Copiar o asset do banco de dados para o Room Library
-            DatabaseCopier copier = DatabaseCopier.getInstance(getApplicationContext());
-            database = copier.getRoomDatabase();
+            viewModel.copyDatabase();
         }else{
-            database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "palavras.db").build();
+            viewModel.getDatabase();
         }
 
     }
 
-
-    /**
-
-     * Checks if the user is opening the app for the first time.
-
-     * Note that this method should be placed inside an activity and it can be called multiple times.
-
-     * @return boolean
-
-     */
 
     private boolean isFirstTime() {
         if (firstTime == null) {
@@ -80,4 +65,5 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
+
 }
