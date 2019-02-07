@@ -4,36 +4,32 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 
-import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
 import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.Viewmodel.MainViewModel;
 
+import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
-import butterknife.OnItemClick;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.botao_jogar)
-    Button botaoJogar;
-    @BindView(R.id.botao_recordes)
-    Button botaoRecorde;
-    private Boolean firstTime = null;
+    @BindView(R.id.botao_jogar) Button botaoJogar;
+    @BindView(R.id.botao_recordes) Button botaoRecorde;
 
-    private static AppDatabase database;
+    private Boolean firstTime = null;
 
     private MainViewModel viewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         viewModel = new MainViewModel(getApplication());
         if(isFirstTime()){
             viewModel.copyDatabase();
-        }else{
-            viewModel.getDatabase();
         }
 
     }
@@ -52,14 +48,15 @@ public class MainActivity extends AppCompatActivity {
         return firstTime;
     }
 
-    @OnItemClick(R.id.botao_jogar)
+
+    @OnClick(R.id.botao_jogar)
     public void jogar(){
         Intent intent = new Intent(MainActivity.this, JogoActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 
-    @OnItemClick(R.id.botao_recordes)
+    @OnClick(R.id.botao_recordes)
     public void recordes(){
         Intent intent = new Intent(MainActivity.this, RecordesActivity.class);
         startActivity(intent);

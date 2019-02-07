@@ -1,8 +1,8 @@
 package com.palavras.unicap.palavrinhas;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 
 import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
 import com.palavras.unicap.palavrinhas.Persistence.DatabaseCopier;

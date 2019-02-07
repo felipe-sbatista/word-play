@@ -1,20 +1,18 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.os.AsyncTask;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
-import android.support.v7.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.palavras.unicap.palavrinhas.Entity.Pontuacao;
 import com.palavras.unicap.palavrinhas.Entity.Usuario;
 import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
-import com.palavras.unicap.palavrinhas.Persistence.DatabaseCopier;
 import com.palavras.unicap.palavrinhas.R;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;

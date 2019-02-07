@@ -1,13 +1,13 @@
 package com.palavras.unicap.palavrinhas.Viewmodel;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.ViewModel;
-import android.arch.persistence.room.Room;
-import android.support.annotation.NonNull;
 
 import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
 import com.palavras.unicap.palavrinhas.Persistence.DatabaseCopier;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.room.Room;
 
 public class MainViewModel extends AndroidViewModel {
     private AppDatabase database;

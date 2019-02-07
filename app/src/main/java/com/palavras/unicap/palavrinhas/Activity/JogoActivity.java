@@ -1,15 +1,11 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
-import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
-import android.speech.tts.TextToSpeech;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,9 +14,8 @@ import android.widget.Toast;
 
 import com.palavras.unicap.palavrinhas.Entity.Palavra;
 import com.palavras.unicap.palavrinhas.Entity.Pontuacao;
-import com.palavras.unicap.palavrinhas.Entity.Usuario;
-import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
 import com.palavras.unicap.palavrinhas.R;
+import com.palavras.unicap.palavrinhas.Viewmodel.JogoViewModel;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -29,18 +24,23 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
+
 public class JogoActivity extends AppCompatActivity{
+
+    private JogoViewModel viewModel;
 
     private Button botaoConfirmar, botaoLimpar;
     private TextView palavraEmTela, textUsuario;
     private TextToSpeech textToSpeech;
     private ImageView botaoPlay, botaoVoltar;
     private MediaPlayer player;
-    private AppDatabase database;
+//    private AppDatabase database;
 
     private String palavraUsuario = "";
     private Palavra palavraAtual;
-    private List<Palavra> palavras = new ArrayList<>();
+    private List<Palavra> palavras;
     private Pontuacao pontuacaoAtual;
     private List<String> vidas = new ArrayList(Arrays.asList("vida1","vida2", "vida3"));
 
@@ -49,45 +49,20 @@ public class JogoActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
+        viewModel = ViewModelProviders.of(this).get(JogoViewModel.class);
+        palavras = viewModel.getPalavras().getValue();
+        this.viewModel.getPalavras().observe(this, allPalavras -> {
+            if(JogoActivity.this.palavras == null){
+                this.palavras = allPalavras;
+            }
+        });
+
 
         this.pontuacaoAtual = new Pontuacao();
         this.pontuacaoAtual.setPontos(0);
 
-        //recebe o acesso ao banco vindo da outra view
-        //this.database = (AppDatabase) getIntent().getSerializableExtra("DbAccess");
-        // final DatabaseCopier copier = DatabaseCopier.getInstance(getApplicationContext());
-        // database = copier.getRoomDatabase();
-        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "palavras.db").build();
-
-
-
-
         palavraEmTela = findViewById(R.id.palavra);
 
-        //listar palavras atraves do DAO
-
-        new AsyncTask<Void, Void, Void>(){
-            @Override
-            protected Void doInBackground(Void... voids) {
-                palavras = database.palavraDAO().loadAllPalavras();
-                if(palavras.size()==0){
-                    Log.d("ERRO", "ERRO DE SQL NA BUSCA");
-                    Intent intent = new Intent(JogoActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                    finish();
-                }
-                return null;
-            }
-        }.execute();
-        Thread t = Thread.currentThread();
-        try {
-            synchronized (t){
-                t.wait(500);
-            }
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         //configurar os botoes para pegar o onClick do confirmar e limpar
         setBotoes();

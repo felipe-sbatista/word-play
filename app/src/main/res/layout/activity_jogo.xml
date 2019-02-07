@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -322,7 +322,7 @@
         app:layout_constraintStart_toEndOf="@+id/buttonY"
         app:layout_constraintTop_toBottomOf="@+id/buttonV" />
 
-    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="667dp"
         android:layout_height="171dp"
         android:layout_marginStart="8dp"
@@ -338,7 +338,7 @@
         card_view:layout_constraintHorizontal_bias="1.0"
         card_view:layout_constraintVertical_bias="1.0">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -407,8 +407,8 @@
                 card_view:layout_constraintTop_toTopOf="parent" />
             <!--app:srcCompat="@android:drawable/ic_media_play" />-->
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <ImageView
         android:id="@+id/botaoVoltar"
@@ -451,4 +451,4 @@
         app:srcCompat="@drawable/coracao_icon" />
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
