@@ -1,6 +1,6 @@
 package com.palavras.unicap.palavrinhas.Persistence;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Context;
 import android.util.Log;
 
@@ -9,7 +9,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.Serializable;
 
 public class DatabaseCopier {
     private static final String TAG = DatabaseCopier.class.getSimpleName();
@@ -36,7 +35,6 @@ public class DatabaseCopier {
         mAppDataBase = Room.databaseBuilder(appContext,
                 AppDatabase.class, DATABASE_NAME)
                 .allowMainThreadQueries()
-                .addMigrations(AppDatabase.MIGRATION_2_3)
                 .build();
     }
 
