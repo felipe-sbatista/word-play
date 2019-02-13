@@ -9,20 +9,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.TextView;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TecladoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TecladoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class TecladoFragment extends Fragment {
+public class TecladoVogalFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -32,22 +21,16 @@ public class TecladoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
-
     private OnFragmentInteractionListener mListener;
 
-    public TecladoFragment() {
+    public TecladoVogalFragment() {
         // Required empty public constructor
     }
 
-    public void getClick(View view) {
-        Button botao = getView().findViewById(view.getId());
-        String letra = botao.getText().toString();
-        onButtonPressed(letra);
-    }
 
-    public static TecladoFragment newInstance(String param1, String param2) {
-        TecladoFragment fragment = new TecladoFragment();
+    // TODO: Rename and change types and number of parameters
+    public static TecladoVogalFragment newInstance(String param1, String param2) {
+        TecladoVogalFragment fragment = new TecladoVogalFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -68,7 +51,7 @@ public class TecladoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_teclado, container, false);
+        return inflater.inflate(R.layout.fragment_teclado_vogal, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -88,13 +71,17 @@ public class TecladoFragment extends Fragment {
                     + " must implement OnFragmentInteractionListener");
         }
     }
+    public void getClick(View view) {
+        Button botao = getView().findViewById(view.getId());
+        String letra = botao.getText().toString();
+        onButtonPressed(letra);
+    }
 
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(String letra);

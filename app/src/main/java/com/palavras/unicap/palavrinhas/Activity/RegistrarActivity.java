@@ -1,6 +1,5 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
-import android.net.Uri;
 import android.os.AsyncTask;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -17,10 +16,9 @@ import android.widget.TextView;
 import com.palavras.unicap.palavrinhas.Entity.Pontuacao;
 import com.palavras.unicap.palavrinhas.Entity.Usuario;
 import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
-import com.palavras.unicap.palavrinhas.Persistence.DatabaseCopier;
 import com.palavras.unicap.palavrinhas.R;
-import com.palavras.unicap.palavrinhas.TecladoFragment;
-import com.palavras.unicap.palavrinhas.TecladoFragment.OnFragmentInteractionListener;
+import com.palavras.unicap.palavrinhas.TecladoAlfabeticoFragment;
+import com.palavras.unicap.palavrinhas.TecladoAlfabeticoFragment.OnFragmentInteractionListener;
 
 public class RegistrarActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
@@ -37,7 +35,7 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         setContentView(R.layout.activity_registrar);
         ButterKnife.bind(this);
 
-        TecladoFragment fragment = new TecladoFragment();
+        TecladoAlfabeticoFragment fragment = new TecladoAlfabeticoFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.teclado, fragment);

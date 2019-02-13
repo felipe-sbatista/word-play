@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="465dp"
     android:layout_height="175dp"
-    tools:context=".TecladoAlfabeticoFragment"
+    tools:context=".TecladoVogalFragment"
     android:background="#fffd82">
-
 
     <Button
         android:id="@+id/buttonA"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="A"
@@ -24,7 +23,8 @@
         android:id="@+id/buttonB"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="B"
@@ -35,7 +35,8 @@
         android:id="@+id/buttonC"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="C"
@@ -46,7 +47,8 @@
         android:id="@+id/buttonD"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="D"
@@ -58,55 +60,58 @@
         android:id="@+id/buttonE"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="E"
-        app:layout_constraintStart_toEndOf="@+id/buttonD"
+        app:layout_constraintStart_toEndOf="@+id/buttonA"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonF"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="F"
-        app:layout_constraintStart_toEndOf="@+id/buttonE"
+        app:layout_constraintStart_toEndOf="@+id/buttonD"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonG"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="44dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="G"
-        app:layout_constraintStart_toEndOf="@+id/buttonF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonH"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginStart="84dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="H"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonA" />
+        app:layout_constraintStart_toEndOf="@+id/buttonU"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonI"
         android:layout_width="40dp"
         android:layout_height="36dp"
+        android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="I"
-        app:layout_constraintStart_toEndOf="@+id/buttonH"
-        app:layout_constraintTop_toBottomOf="@+id/buttonC" />
+        app:layout_constraintStart_toEndOf="@+id/buttonE"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonJ"
@@ -116,24 +121,26 @@
         android:onClick="getClick"
         android:padding="4dp"
         android:text="J"
-        app:layout_constraintStart_toEndOf="@+id/buttonI"
-        app:layout_constraintTop_toBottomOf="@+id/buttonD" />
+        app:layout_constraintStart_toEndOf="@+id/buttonH"
+        app:layout_constraintTop_toBottomOf="@+id/buttonB" />
 
 
     <Button
         android:id="@+id/buttonK"
         android:layout_width="40dp"
         android:layout_height="36dp"
+        android:layout_marginStart="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="K"
         app:layout_constraintStart_toEndOf="@+id/buttonJ"
-        app:layout_constraintTop_toBottomOf="@+id/buttonE" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonD" />
 
     <Button
         android:id="@+id/buttonL"
         android:layout_width="40dp"
         android:layout_height="36dp"
+        android:layout_marginStart="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="L"
@@ -155,50 +162,54 @@
         android:id="@+id/buttonN"
         android:layout_width="40dp"
         android:layout_height="36dp"
+        android:layout_marginEnd="44dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="N"
-        app:layout_constraintStart_toEndOf="@+id/buttonM"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonG" />
 
     <Button
         android:id="@+id/buttonO"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginStart="84dp"
+        android:layout_marginStart="16dp"
         android:clickable="true"
         android:onClick="getClick"
         android:padding="1dp"
         android:text="O"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonI" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonA" />
 
     <Button
         android:id="@+id/buttonP"
         android:layout_width="40dp"
         android:layout_height="36dp"
+        android:layout_marginTop="40dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="P"
-        app:layout_constraintStart_toEndOf="@+id/buttonO"
-        app:layout_constraintTop_toBottomOf="@+id/buttonJ" />
+        app:layout_constraintStart_toEndOf="@+id/buttonN"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonQ"
         android:layout_width="40dp"
         android:layout_height="36dp"
+        android:layout_marginStart="156dp"
         android:clickable="true"
         android:onClick="getClick"
         android:padding="1dp"
         android:text="Q"
-        app:layout_constraintStart_toEndOf="@+id/buttonP"
-        app:layout_constraintTop_toBottomOf="@+id/buttonK" />
+        app:layout_constraintStart_toEndOf="@+id/buttonO"
+        app:layout_constraintTop_toBottomOf="@+id/buttonJ" />
 
     <Button
         android:id="@+id/buttonR"
         android:layout_width="40dp"
         android:layout_height="36dp"
 
+        android:layout_marginStart="4dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="R"
@@ -209,7 +220,7 @@
         android:id="@+id/buttonS"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginStart="244dp"
+        android:layout_marginStart="296dp"
 
         android:clickable="true"
         android:onClick="getClick"
@@ -235,30 +246,30 @@
         android:clickable="true"
         android:onClick="getClick"
         android:text="U"
-        app:layout_constraintStart_toEndOf="@+id/buttonT"
-        app:layout_constraintTop_toBottomOf="@+id/buttonN" />
+        app:layout_constraintStart_toEndOf="@+id/buttonO"
+        app:layout_constraintTop_toBottomOf="@+id/buttonE" />
 
     <Button
         android:id="@+id/buttonV"
         android:layout_width="40dp"
         android:layout_height="36dp"
 
-        android:layout_marginStart="124dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="V"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonP" />
+        app:layout_constraintStart_toEndOf="@+id/buttonT"
+        app:layout_constraintTop_toBottomOf="@+id/buttonN" />
 
     <Button
         android:id="@+id/buttonW"
         android:layout_width="40dp"
         android:layout_height="36dp"
 
+        android:layout_marginStart="232dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="W"
-        app:layout_constraintStart_toEndOf="@+id/buttonV"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonQ" />
 
     <Button
@@ -276,7 +287,7 @@
         android:id="@+id/buttonY"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginStart="244dp"
+        android:layout_marginStart="312dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="Y"
@@ -287,11 +298,13 @@
         android:id="@+id/buttonZ"
         android:layout_width="40dp"
         android:layout_height="36dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginEnd="72dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="Z"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonT" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,10 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
-import androidx.room.Room;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,12 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +28,8 @@ import com.palavras.unicap.palavrinhas.Entity.Palavra;
 import com.palavras.unicap.palavrinhas.Entity.Pontuacao;
 import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
 import com.palavras.unicap.palavrinhas.R;
+import com.palavras.unicap.palavrinhas.TecladoAlfabeticoFragment;
+import com.palavras.unicap.palavrinhas.TecladoVogalFragment;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
@@ -33,7 +39,7 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
-public class JogoActivity extends AppCompatActivity{
+public class JogoActivity extends AppCompatActivity implements TecladoAlfabeticoFragment.OnFragmentInteractionListener, TecladoVogalFragment.OnFragmentInteractionListener {
 
     @BindView (R.id.botao_confirmar)
     Button botaoConfirmar;
@@ -47,10 +53,19 @@ public class JogoActivity extends AppCompatActivity{
     @BindView(R.id.botao_voltar)
     ImageView botaoVoltar;
 
-    private TextView palavraEmTela, textUsuario;
+    @BindView(R.id.switch_teclado)
+    Switch botaoSwitch;
+
+    @BindView(R.id.palavra)
+    TextView palavraEmTela;
+
+
+    private TextView textUsuario;
     private TextToSpeech textToSpeech;
     private MediaPlayer player;
     private AppDatabase database;
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private Fragment fragmentTeclado;
 
     private String palavraUsuario = "";
     private Palavra palavraAtual;
@@ -59,30 +74,28 @@ public class JogoActivity extends AppCompatActivity{
     private List<String> vidas = new ArrayList(Arrays.asList("vida1","vida2", "vida3"));
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
         ButterKnife.bind(this);
 
-        this.pontuacaoAtual = new Pontuacao();
-        this.pontuacaoAtual.setPontos(0);
+        fragmentTeclado = new TecladoAlfabeticoFragment();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.teclado_jogo, fragmentTeclado);
+        transaction.commit();
 
-        //recebe o acesso ao banco vindo da outra view
-        //this.database = (AppDatabase) getIntent().getSerializableExtra("DbAccess");
-        // final DatabaseCopier copier = DatabaseCopier.getInstance(getApplicationContext());
-        // database = copier.getRoomDatabase();
-        database = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "palavras.db").build();
-
-
-
-
-        palavraEmTela = findViewById(R.id.palavra);
-
-        //listar palavras atraves do DAO
+        Runnable r = () -> {
+            this.pontuacaoAtual = new Pontuacao();
+            this.pontuacaoAtual.setPontos(0);
+            database = AppDatabase.getInstance(this);
+        };
+        r.run();
 
         try {
            palavras = new AsyncTask<Void, Void, List<Palavra>>(){
+                @SuppressLint("WrongThread")
                 @Override
                 protected List<Palavra> doInBackground(Void... voids) {
                     return database.palavraDAO().loadAllPalavras();
@@ -96,8 +109,12 @@ public class JogoActivity extends AppCompatActivity{
             e.printStackTrace();
         }
 
-        //escolher a primeira palavra
-        selectPalavra();
+        Runnable r2 = ()->{
+            //escolher a primeira palavra
+            selectPalavra();
+        };
+        r2.run();
+
 
         //carregar o som de acerto da palavra
         player = MediaPlayer.create(this, R.raw.success);
@@ -175,6 +192,21 @@ public class JogoActivity extends AppCompatActivity{
                 textToSpeech.speak(palavraAtual.getTexto(),TextToSpeech.QUEUE_FLUSH,null, null));
     }
 
+    @OnClick(R.id.switch_teclado)
+    public void switchTeclado(){
+        Runnable r = ()-> {
+            if (fragmentTeclado instanceof TecladoAlfabeticoFragment) {
+                fragmentTeclado = new TecladoVogalFragment();
+            } else {
+                fragmentTeclado = new TecladoAlfabeticoFragment();
+            }
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.teclado_jogo, fragmentTeclado);
+            transaction.commit();
+        };
+        r.run();
+    }
+
     @OnClick(R.id.botao_voltar)
     public void botaoVoltar(){
         Intent intent = new Intent(JogoActivity.this, MainActivity.class);
@@ -186,9 +218,7 @@ public class JogoActivity extends AppCompatActivity{
     public void getClick(View view) {
         Button botao = findViewById(view.getId());
         String letra = botao.getText().toString();
-        palavraUsuario = palavraUsuario + letra ;
-        textUsuario = findViewById(R.id.palavra);
-        textUsuario.setText(palavraUsuario);
+        onFragmentInteraction(letra);
     }
 
     private void setImagem(Palavra palavra){
@@ -204,6 +234,13 @@ public class JogoActivity extends AppCompatActivity{
         int id = getResources().getIdentifier(imagemVida, "id", getPackageName());
         ImageView imageView = findViewById(id);
         imageView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onFragmentInteraction(String letra) {
+        palavraUsuario = palavraUsuario + letra ;
+        textUsuario = findViewById(R.id.palavra);
+        textUsuario.setText(palavraUsuario);
     }
     // </Operacoes de configuracao de tela>
 }

@@ -60,7 +60,7 @@
 
     <fragment
         android:id="@+id/teclado"
-        android:name="com.palavras.unicap.palavrinhas.TecladoFragment"
+        android:name="com.palavras.unicap.palavrinhas.TecladoAlfabeticoFragment"
         android:layout_width="479dp"
         android:layout_height="203dp"
         android:layout_marginEnd="52dp"
