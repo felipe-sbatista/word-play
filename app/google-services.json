@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "400446952956",
+    "firebase_url": "https://word-1d5dc.firebaseio.com",
+    "project_id": "word-1d5dc",
+    "storage_bucket": "word-1d5dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400446952956:android:2a6ccdd13030b8d4",
+        "android_client_info": {
+          "package_name": "com.palavras.unicap.palavrinhas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400446952956-bp5eg8anrpqhinp1b4njvjr3mu63j4s8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.palavras.unicap.palavrinhas",
+            "certificate_hash": "14fe5215bcfb7b1f6a80b61857e065b640d16247"
+          }
+        },
+        {
+          "client_id": "400446952956-oi1pndlmnb025jq0alr8l2189uh5srn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAArCcAMutmu52TEozLBUKo0oFUqyokQMk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400446952956-oi1pndlmnb025jq0alr8l2189uh5srn5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
