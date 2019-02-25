@@ -1,4 +1,4 @@
-package com.palavras.unicap.palavrinhas;
+package com.palavras.unicap.palavrinhas.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,22 +10,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.palavras.unicap.palavrinhas.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TecladoAlfabeticoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TecladoAlfabeticoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
+
 public class TecladoAlfabeticoFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -35,12 +29,6 @@ public class TecladoAlfabeticoFragment extends Fragment {
 
     public TecladoAlfabeticoFragment() {
         // Required empty public constructor
-    }
-
-    public void getClick(View view) {
-        Button botao = getView().findViewById(view.getId());
-        String letra = botao.getText().toString();
-        onButtonPressed(letra);
     }
 
     public static TecladoAlfabeticoFragment newInstance(String param1, String param2) {

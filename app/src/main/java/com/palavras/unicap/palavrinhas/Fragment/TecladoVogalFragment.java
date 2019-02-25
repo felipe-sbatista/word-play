@@ -1,7 +1,6 @@
-package com.palavras.unicap.palavrinhas;
+package com.palavras.unicap.palavrinhas.Fragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.palavras.unicap.palavrinhas.R;
 
 public class TecladoVogalFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
@@ -70,11 +71,6 @@ public class TecladoVogalFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-    }
-    public void getClick(View view) {
-        Button botao = getView().findViewById(view.getId());
-        String letra = botao.getText().toString();
-        onButtonPressed(letra);
     }
 
     @Override

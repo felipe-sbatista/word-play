@@ -17,8 +17,8 @@ import com.palavras.unicap.palavrinhas.Entity.Pontuacao;
 import com.palavras.unicap.palavrinhas.Entity.Usuario;
 import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
 import com.palavras.unicap.palavrinhas.R;
-import com.palavras.unicap.palavrinhas.TecladoAlfabeticoFragment;
-import com.palavras.unicap.palavrinhas.TecladoAlfabeticoFragment.OnFragmentInteractionListener;
+import com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment;
+import com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment.OnFragmentInteractionListener;
 
 public class RegistrarActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
@@ -42,7 +42,7 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         ft.commit();
 
 
-       database = AppDatabase.getInstance(this);
+        database = AppDatabase.getInstance(this);
         this.pontuacao = (Pontuacao)getIntent().getSerializableExtra("Pontuacao");
         this.mensagem = getIntent().getStringExtra("Mensagem");
         TextView msgFinal = findViewById(R.id.mensagemFinal);
