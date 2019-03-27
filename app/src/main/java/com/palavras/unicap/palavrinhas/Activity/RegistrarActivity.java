@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.palavras.unicap.palavrinhas.Entity.Pontuacao;
 import com.palavras.unicap.palavrinhas.Entity.Usuario;
 import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
@@ -22,12 +24,13 @@ import com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment.OnFrag
 
 public class RegistrarActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
-    private AppDatabase database;
+//    private AppDatabase database;
     private Pontuacao pontuacao;
     private String mensagem="", nome="";
 
     @BindView(R.id.botao_salvar)
     Button botaoSalvar;
+    FirebaseDatabase database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +45,13 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         ft.commit();
 
 
-        database = AppDatabase.getInstance(this);
+//        database = AppDatabase.getInstance(this);
         this.pontuacao = (Pontuacao)getIntent().getSerializableExtra("Pontuacao");
         this.mensagem = getIntent().getStringExtra("Mensagem");
         TextView msgFinal = findViewById(R.id.mensagemFinal);
         msgFinal.setText(mensagem + "\n" + pontuacao.getPontos() + " - PONTOS");
+
+        database = FirebaseDatabase.getInstance();
 
     }
 
@@ -58,7 +63,9 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         new AsyncTask<Void, Void, Void>(){
             @Override
             protected Void doInBackground(Void... voids) {
-                int id = (int) database.usuarioDAO().insertUsuario(usuario);
+                DatabaseReference reference = database.getReference("").child("");
+                reference.push().setValue(usuario);
+                reference.child("usuarios").child("teste").setValue(usuario);
                 pontuacao.setUsuarioId(id);
                 database.pontuacaoDAO().insertPontuacao(pontuacao);
                 return null;
