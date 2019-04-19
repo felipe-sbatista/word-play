@@ -1,22 +1,20 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
-import androidx.room.Room;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
-import com.palavras.unicap.palavrinhas.Persistence.DatabaseCopier;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.palavras.unicap.palavrinhas.Entity.Palavra;
 import com.palavras.unicap.palavrinhas.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,8 +22,9 @@ public class MainActivity extends AppCompatActivity {
     Button botaoJogar;
     @BindView(R.id.botao_recordes)
     Button botaoRecorde;
-    private Boolean firstTime = null;
-    private static AppDatabase database;
+
+    List<Palavra> palavras = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

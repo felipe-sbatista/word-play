@@ -1,37 +1,19 @@
 package com.palavras.unicap.palavrinhas.Entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity(tableName = "usuario")
 public class Usuario {
 
-    @PrimaryKey
-    @ColumnInfo(name = "Id")
-    private Long id;
-
-    @ColumnInfo(name = "nome")
     private String nome;
 
-    @ColumnInfo(name = "data_nascimento")
+    private int segundos;
+
     private String dataNascimento;
 
-    @Ignore
     private List<Integer> pontos = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
@@ -55,5 +37,13 @@ public class Usuario {
 
     public void setPontos(List<Integer> pontos) {
         this.pontos = pontos;
+    }
+
+    public int getSegundos() {
+        return segundos;
+    }
+
+    public void setSegundos(int segundos) {
+        this.segundos = segundos;
     }
 }

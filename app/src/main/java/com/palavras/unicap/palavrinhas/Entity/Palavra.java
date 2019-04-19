@@ -1,24 +1,24 @@
 package com.palavras.unicap.palavrinhas.Entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
+import android.os.Build;
 
+import androidx.annotation.RequiresApi;
 
-@Entity(tableName = "Palavra")
+import java.util.Base64;
+
 public class Palavra {
 
-    @PrimaryKey
     private Long id;
 
-    @ColumnInfo(name = "texto")
     private String texto;
 
-    @ColumnInfo(name = "imagem")
-    private byte[] imagem;
+    private String imagemBase64;
 
-    @ColumnInfo(name = "som")
-    private byte[] som;
+    private String somBase64;
+
+    private byte[] imagem = null;
+
+    private byte[] som = null;
 
 
     public Long getId() {
@@ -37,19 +37,37 @@ public class Palavra {
         this.texto = texto;
     }
 
-    public byte[] getImagem() {
-        return imagem;
+    public String getImagemBase64() {
+        return imagemBase64;
     }
 
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
+    public void setImagemBase64(String imagemBase64) {
+        this.imagemBase64 = imagemBase64;
     }
 
-    public byte[] getSom() {
-        return som;
+    public String getSomBase64() {
+        return somBase64;
     }
 
-    public void setSom(byte[] som) {
-        this.som = som;
+    public void setSomBase64(String somBase64) {
+        this.somBase64 = somBase64;
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public byte[] getImagem(){
+        if(this.imagem == null){
+            this.imagem = Base64.getEncoder().encode(this.imagemBase64.getBytes());
+        }
+        return this.imagem;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public byte[] getSom(){
+        if(this.som == null){
+            this.som = Base64.getEncoder().encode(this.somBase64.getBytes());
+        }
+        return this.som;
+    }
+
+
 }

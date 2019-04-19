@@ -1,36 +1,35 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
 import android.os.AsyncTask;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.palavras.unicap.palavrinhas.Entity.Pontuacao;
 import com.palavras.unicap.palavrinhas.Entity.Usuario;
-import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
-import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment;
 import com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment.OnFragmentInteractionListener;
+import com.palavras.unicap.palavrinhas.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class RegistrarActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
-//    private AppDatabase database;
-    private Pontuacao pontuacao;
+    private int pontuacao = 0;
     private String mensagem="", nome="";
+    private FirebaseDatabase database;
 
     @BindView(R.id.botao_salvar)
     Button botaoSalvar;
-    FirebaseDatabase database;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +43,10 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         ft.add(R.id.teclado, fragment);
         ft.commit();
 
-
-//        database = AppDatabase.getInstance(this);
-        this.pontuacao = (Pontuacao)getIntent().getSerializableExtra("Pontuacao");
+        this.pontuacao = getIntent().getIntExtra("Pontuacao", 0);
         this.mensagem = getIntent().getStringExtra("Mensagem");
         TextView msgFinal = findViewById(R.id.mensagemFinal);
-        msgFinal.setText(mensagem + "\n" + pontuacao.getPontos() + " - PONTOS");
+        msgFinal.setText(mensagem + "\n" + pontuacao+ " - PONTOS");
 
         database = FirebaseDatabase.getInstance();
 
@@ -63,11 +60,8 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         new AsyncTask<Void, Void, Void>(){
             @Override
             protected Void doInBackground(Void... voids) {
-                DatabaseReference reference = database.getReference("").child("");
+                DatabaseReference reference = database.getReference("https://palavrinhas-unicap.firebaseio.com").child("usuarios");
                 reference.push().setValue(usuario);
-                reference.child("usuarios").child("teste").setValue(usuario);
-                pontuacao.setUsuarioId(id);
-                database.pontuacaoDAO().insertPontuacao(pontuacao);
                 return null;
             }
         }.execute();
@@ -82,6 +76,7 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         TextView t = findViewById(R.id.nome);
         t.setText(nome);
     }
+
     public void getClick(View view) {
         Button botao = findViewById(view.getId());
         String letra = botao.getText().toString();

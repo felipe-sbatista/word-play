@@ -1,34 +1,20 @@
 package com.palavras.unicap.palavrinhas.Activity;
 
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Room;
-import android.os.AsyncTask;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
-import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-import android.widget.TextView;
 
-import com.palavras.unicap.palavrinhas.Entity.Pontuacao;
 import com.palavras.unicap.palavrinhas.Entity.Usuario;
-import com.palavras.unicap.palavrinhas.Persistence.AppDatabase;
 import com.palavras.unicap.palavrinhas.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 
 
 public class RecordesActivity extends AppCompatActivity {
 
-    private AppDatabase database;
-    private List<Pontuacao> pontuacoes;
     private List<Usuario> usuarios = new ArrayList<>();
     private int[] ids;
 
@@ -37,7 +23,6 @@ public class RecordesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordes);
 
-        database = AppDatabase.getInstance(this);
 //        usuarios = database.usuarioDAO().loadAllUsuarios();
         Usuario u1 = new Usuario();
         Usuario u2 = new Usuario();

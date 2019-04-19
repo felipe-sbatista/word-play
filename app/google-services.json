@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "582245057284",
+    "firebase_url": "https://palavrinhas-unicap.firebaseio.com",
+    "project_id": "palavrinhas-unicap",
+    "storage_bucket": "palavrinhas-unicap.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582245057284:android:2a6ccdd13030b8d4",
+        "android_client_info": {
+          "package_name": "com.palavras.unicap.palavrinhas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582245057284-j75t2u8edqjef89o7jcjsus1lmjf243n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.palavras.unicap.palavrinhas",
+            "certificate_hash": "ea7e61211d79fbefb39272e37b6ef3cf117d19ce"
+          }
+        },
+        {
+          "client_id": "582245057284-ds7q75e6esk80hsomcaef5u1vdbgilcj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAx_pVONuId1Oa6iRUJaTL0b0qeQyY-wd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582245057284-ds7q75e6esk80hsomcaef5u1vdbgilcj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
