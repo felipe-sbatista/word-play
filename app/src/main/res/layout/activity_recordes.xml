@@ -5,40 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout"
-    tools:context=".Activity.RecordesActivity"
+    tools:context=".activity.RecordesActivity"
     android:background="#fffd82">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/lista_usuarios"
         android:layout_width="677dp"
         android:layout_height="307dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_usuario"
-        android:id="@+id/lista_usuarios">
-
-        <View
-            android:id="@+id/lista_notas_fundo_gradiente_inferior"
-            android:layout_width="0dp"
-            android:layout_height="5dp"
-            android:background="@drawable/fundo_gradiente_insere_nota"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="Inserir uma nota"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="TESTE"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:listitem="@layout/item_usuario">
 
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Recordes"
+        android:textSize="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
