@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="465dp"
     android:layout_height="175dp"
-    tools:context=".Fragment.TecladoAlfabeticoFragment"
+    tools:context=".fragment.TecladoAlfabeticoFragment"
     android:background="#fffd82">
 
 

@@ -1,38 +1,31 @@
-package com.palavras.unicap.palavrinhas.Fragment;
+package com.palavras.unicap.palavrinhas.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
 
 import com.palavras.unicap.palavrinhas.R;
 
-
-
-public class TecladoAlfabeticoFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class TecladoVogalFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
     private String mParam2;
 
-
-
     private OnFragmentInteractionListener mListener;
 
-    public TecladoAlfabeticoFragment() {
+    public TecladoVogalFragment() {
         // Required empty public constructor
     }
 
-    public static TecladoAlfabeticoFragment newInstance(String param1, String param2) {
-        TecladoAlfabeticoFragment fragment = new TecladoAlfabeticoFragment();
+
+    public static TecladoVogalFragment newInstance(String param1, String param2) {
+        TecladoVogalFragment fragment = new TecladoVogalFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -53,10 +46,9 @@ public class TecladoAlfabeticoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_teclado, container, false);
+        return inflater.inflate(R.layout.fragment_teclado_vogal, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(String letra) {
         if (mListener != null) {
             mListener.onFragmentInteraction(letra);
@@ -79,9 +71,7 @@ public class TecladoAlfabeticoFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(String letra);
     }
 }

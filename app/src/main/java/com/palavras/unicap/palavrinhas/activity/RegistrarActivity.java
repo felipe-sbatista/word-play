@@ -1,4 +1,4 @@
-package com.palavras.unicap.palavrinhas.Activity;
+package com.palavras.unicap.palavrinhas.activity;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,10 +12,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.palavras.unicap.palavrinhas.Entity.Usuario;
-import com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment;
-import com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment.OnFragmentInteractionListener;
+import com.palavras.unicap.palavrinhas.entity.Usuario;
+import com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment;
+import com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment.OnFragmentInteractionListener;
 import com.palavras.unicap.palavrinhas.R;
+import com.palavras.unicap.palavrinhas.util.Constantes;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,19 +55,32 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
 
     @OnClick(R.id.botao_salvar)
     public void salvarUsuario(){
-        TextView textView = findViewById(R.id.nome);
-        Usuario usuario = new Usuario();
-        usuario.setNome(String.valueOf(textView.getText()));
+
+        Usuario usuario = this.createUsuario();
+
+
         new AsyncTask<Void, Void, Void>(){
             @Override
             protected Void doInBackground(Void... voids) {
-                DatabaseReference reference = database.getReference("https://palavrinhas-unicap.firebaseio.com").child("usuarios");
-                reference.push().setValue(usuario);
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = database.getReference(Constantes.USUARIOS_REFERENCE);
+                databaseReference.push().setValue(usuario);
                 return null;
             }
         }.execute();
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
+    }
+
+    private Usuario createUsuario(){
+        Usuario usuario = new Usuario();
+        int pontuacao = getIntent().getIntExtra("pontos",0);
+        int tempo  = getIntent().getIntExtra("segundos", 0);
+        TextView textView = findViewById(R.id.nome);
+        usuario.setNome(String.valueOf(textView.getText()));
+        usuario.setPontos(pontuacao);
+        usuario.setSegundos(tempo);
+        return usuario;
     }
 
 

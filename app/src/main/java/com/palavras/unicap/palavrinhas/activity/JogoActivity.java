@@ -1,4 +1,4 @@
-package com.palavras.unicap.palavrinhas.Activity;
+package com.palavras.unicap.palavrinhas.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -14,11 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.palavras.unicap.palavrinhas.Entity.Palavra;
-import com.palavras.unicap.palavrinhas.Fragment.JogoFragment;
-import com.palavras.unicap.palavrinhas.Fragment.LifeFragment;
-import com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment;
-import com.palavras.unicap.palavrinhas.Fragment.TecladoVogalFragment;
+import com.palavras.unicap.palavrinhas.entity.Palavra;
+import com.palavras.unicap.palavrinhas.fragment.JogoFragment;
+import com.palavras.unicap.palavrinhas.fragment.LifeFragment;
+import com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment;
+import com.palavras.unicap.palavrinhas.fragment.TecladoVogalFragment;
 import com.palavras.unicap.palavrinhas.R;
 
 import java.util.ArrayList;
@@ -30,8 +30,9 @@ import butterknife.OnClick;
 
 public class JogoActivity extends AppCompatActivity
         implements TecladoAlfabeticoFragment.OnFragmentInteractionListener,
-        TecladoVogalFragment.OnFragmentInteractionListener,
-        JogoFragment.OnFragmentJogoInteraction, LifeFragment.OnFragmentInteractionListener {
+                    TecladoVogalFragment.OnFragmentInteractionListener,
+                    JogoFragment.OnFragmentJogoInteraction,
+                    LifeFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.botao_voltar)
     ImageView botaoVoltar;
@@ -60,6 +61,9 @@ public class JogoActivity extends AppCompatActivity
         transaction.add(R.id.teclado_jogo, tecladoFragment);
         transaction.add(R.id.tela_jogo, jogoFragment);
         transaction.commit();
+
+        //TODO: Ajustar o botao confirmar
+        //TODO: Ajustar life fragment
     }
 
 
@@ -100,7 +104,7 @@ public class JogoActivity extends AppCompatActivity
         Button botao = findViewById(view.getId());
         String letra = botao.getText().toString();
         palavraUsuario = palavraUsuario + letra ;
-        textUsuario = findViewById(R.id.palavra);
+        textUsuario = findViewById(R.id.palavra_escrita);
         textUsuario.setText(palavraUsuario);
     }
 

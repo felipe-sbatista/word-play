@@ -18,7 +18,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:node="replace">
         <activity
-            android:name=".Activity.MainActivity"
+            android:name=".activity.MainActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,13 +27,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.JogoActivity"
+            android:name=".activity.JogoActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activity.RecordesActivity"
+            android:name=".activity.RecordesActivity"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Activity.RegistrarActivity"
+            android:name=".activity.RegistrarActivity"
             android:screenOrientation="landscape"></activity>
     </application>
 

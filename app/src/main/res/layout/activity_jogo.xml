@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fffd82"
-    tools:context=".Activity.JogoActivity">
+    tools:context=".activity.JogoActivity">
 
 
     <androidx.appcompat.widget.ContentFrameLayout
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <fragment
-            android:name="com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment"
+            android:name="com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment"
             android:layout_width="610dp"
             android:layout_height="178dp"
             android:layout_marginStart="30dp"
@@ -33,7 +33,7 @@
 
     <androidx.appcompat.widget.ContentFrameLayout
         android:id="@+id/teclado_jogo"
-        android:layout_width="504dp"
+        android:layout_width="480dp"
         android:layout_height="203dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="192dp"
@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <fragment
-            android:name="com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment"
+            android:name="com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment"
             android:layout_width="466dp"
             android:layout_height="203dp"
             android:layout_marginStart="30dp"
@@ -58,8 +58,7 @@
         android:id="@+id/botao_voltar"
         android:layout_width="62dp"
         android:layout_height="65dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert" />
@@ -68,33 +67,36 @@
         android:id="@+id/life_jogo"
         android:layout_width="55dp"
         android:layout_height="155dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/teclado_jogo"
+        app:layout_constraintTop_toBottomOf="@+id/tela_jogo">
         <fragment
-            android:name="com.palavras.unicap.palavrinhas.Fragment.LifeFragment"
+            android:name="com.palavras.unicap.palavrinhas.fragment.LifeFragment"
             android:layout_width="55dp"
             android:layout_height="145dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="156dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="1.0"
             tools:layout="@layout/fragment_life"></fragment>
 
     </androidx.appcompat.widget.ContentFrameLayout>
+
+
 
     <Switch
         android:id="@+id/switch_teclado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="4dp"
         android:text="Teclado"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/teclado_jogo"
         app:layout_constraintTop_toBottomOf="@+id/life_jogo" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

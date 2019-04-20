@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="55dp"
     android:layout_height="140dp"
-    tools:context=".Fragment.LifeFragment"
+    tools:context=".fragment.LifeFragment"
     android:tag="life_fragment"
     android:background="#fffd82">
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.RegistrarActivity"
+    tools:context=".activity.RegistrarActivity"
     android:background="#fffd82">
 
 
@@ -60,7 +60,7 @@
 
     <fragment
         android:id="@+id/teclado"
-        android:name="com.palavras.unicap.palavrinhas.Fragment.TecladoAlfabeticoFragment"
+        android:name="com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment"
         android:layout_width="479dp"
         android:layout_height="203dp"
         android:layout_marginEnd="52dp"

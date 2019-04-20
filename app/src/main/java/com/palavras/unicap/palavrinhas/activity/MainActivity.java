@@ -1,4 +1,4 @@
-package com.palavras.unicap.palavrinhas.Activity;
+package com.palavras.unicap.palavrinhas.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,11 +6,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.palavras.unicap.palavrinhas.Entity.Palavra;
+import com.google.firebase.FirebaseApp;
 import com.palavras.unicap.palavrinhas.R;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,13 +20,12 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.botao_recordes)
     Button botaoRecorde;
 
-    List<Palavra> palavras = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        FirebaseApp.initializeApp(this);
     }
 
     @OnClick(R.id.botao_jogar)
