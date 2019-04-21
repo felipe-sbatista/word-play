@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, JogoActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        finish();
     }
 
     @OnClick(R.id.botao_recordes)
@@ -41,6 +40,5 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, RecordesActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-        finish();
     }
 }

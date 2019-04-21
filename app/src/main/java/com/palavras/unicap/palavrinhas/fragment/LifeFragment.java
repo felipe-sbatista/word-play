@@ -3,6 +3,8 @@ package com.palavras.unicap.palavrinhas.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,13 +90,22 @@ public class LifeFragment extends Fragment {
         int id = getResources().getIdentifier(vida, "id", getActivity().getPackageName());
         ImageView imageView = getView().findViewById(id);
         imageView.setVisibility(View.GONE);
-//        Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-//        vibrator.vibrate(VibrationEffect.createOneShot(30,VibrationEffect.DEFAULT_AMPLITUDE));
+        Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(VibrationEffect.createOneShot(30,VibrationEffect.DEFAULT_AMPLITUDE));
 
     }
 
     public boolean isFinished(){
         return vidas.size() < 1;
+    }
+
+
+    public void restoreLife(){
+        this.vidas.add("vida1");
+        int id = getResources().getIdentifier(this.vidas.get(0), "id", getActivity().getPackageName());
+        ImageView imageView = getView().findViewById(id);
+        imageView.setVisibility(View.VISIBLE);
+
     }
 
 }

@@ -123,4 +123,9 @@ public class JogoActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
 }

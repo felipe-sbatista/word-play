@@ -10,20 +10,19 @@
 
     <androidx.appcompat.widget.ContentFrameLayout
         android:id="@+id/tela_jogo"
-        android:layout_width="630dp"
-        android:layout_height="181dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
         <fragment
             android:name="com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment"
-            android:layout_width="610dp"
-            android:layout_height="178dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
@@ -36,17 +35,16 @@
         android:layout_width="480dp"
         android:layout_height="203dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="192dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/botao_voltar"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tela_jogo">
 
         <fragment
             android:name="com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment"
-            android:layout_width="466dp"
-            android:layout_height="203dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView"
@@ -73,8 +71,8 @@
         app:layout_constraintTop_toBottomOf="@+id/tela_jogo">
         <fragment
             android:name="com.palavras.unicap.palavrinhas.fragment.LifeFragment"
-            android:layout_width="55dp"
-            android:layout_height="145dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout="@layout/fragment_life"></fragment>

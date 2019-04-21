@@ -6,17 +6,18 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:node="replace">
+        <activity android:name=".activity.SegundaChanceActivity"></activity>
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="landscape">
@@ -34,7 +35,7 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".activity.RegistrarActivity"
-            android:screenOrientation="landscape"></activity>
+            android:screenOrientation="landscape" />
     </application>
 
 </manifest>

@@ -25,10 +25,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.activity.JogoActivity;
 import com.palavras.unicap.palavrinhas.entity.Palavra;
 import com.palavras.unicap.palavrinhas.exception.EndgameException;
-import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.util.Constantes;
 
 import java.util.ArrayList;
@@ -156,9 +156,9 @@ public class JogoFragment extends Fragment {
     public void confirmarWord() {
         if (!this.palavraAtual.getTexto().toUpperCase().equals(this.palavraUsuario.toUpperCase())) {
             FragmentManager manager = getFragmentManager();
-            LifeFragment fragment = (LifeFragment) manager.findFragmentByTag("life_fragment");
-            fragment.reduzir();
-            if(fragment.isFinished()){
+            LifeFragment lifeFragment = (LifeFragment) manager.findFragmentByTag("life_fragment");
+            lifeFragment.reduzir();
+            if(lifeFragment.isFinished()){
                 ((JogoActivity)getActivity()).encerrarPartida("Muito bem, continue assim!");
             }
         }else{

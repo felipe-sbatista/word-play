@@ -19,9 +19,7 @@ public class TecladoVogalFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public TecladoVogalFragment() {
-        // Required empty public constructor
-    }
+    public TecladoVogalFragment() {}
 
 
     public static TecladoVogalFragment newInstance(String param1, String param2) {
