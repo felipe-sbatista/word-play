@@ -2,15 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="600dp"
-    android:layout_height="185dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".fragment.JogoFragment"
     >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="598dp"
-        android:layout_height="175dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="8dp"
@@ -21,15 +21,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="599dp"
-            android:layout_height="175dp">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/textViewPalavra"
-                android:layout_width="146dp"
+                android:layout_width="wrap_content"
                 android:layout_height="45dp"
                 android:layout_marginStart="40dp"
-                android:text="Palavra: "
+                android:text="PALAVRA : "
                 android:textSize="32sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imagemPalavra" />
@@ -38,12 +38,11 @@
                 android:id="@+id/palavra_escrita"
                 android:layout_width="200dp"
                 android:layout_height="45dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="112dp"
+                android:layout_marginStart="12dp"
                 android:text=""
                 android:textSize="32sp"
                 app:layout_constraintStart_toEndOf="@+id/textViewPalavra"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/textViewPalavra" />
 
             <Button
                 android:id="@+id/botao_confirmar"
@@ -61,12 +60,15 @@
                 android:id="@+id/botao_limpar"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="40dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="8dp"
                 android:background="#ffc857"
                 android:text="Limpar"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/palavra_escrita" />
 
             <ImageView
                 android:id="@+id/imagemPalavra"
@@ -83,7 +85,7 @@
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="68dp"
+                android:layout_marginEnd="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_lock_silent_mode_off" />

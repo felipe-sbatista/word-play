@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import com.palavras.unicap.palavrinhas.R;
 
 
-
 public class TecladoAlfabeticoFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -78,4 +77,5 @@ public class TecladoAlfabeticoFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(String letra);
     }
+
 }

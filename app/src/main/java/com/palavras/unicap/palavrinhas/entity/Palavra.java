@@ -1,6 +1,8 @@
 package com.palavras.unicap.palavrinhas.entity;
 
-public class Palavra {
+import java.io.Serializable;
+
+public class Palavra  implements Serializable {
 
     private String texto;
 

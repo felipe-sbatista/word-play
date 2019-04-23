@@ -41,8 +41,7 @@ public class SegundaChanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda_chance);
         Intent intent = getIntent();
-        List<Palavra> palavras = new ArrayList<>();
-        palavras = (List<Palavra>) intent.getSerializableExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE);
+        List<Palavra> palavras = (List<Palavra>) intent.getSerializableExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE);
         this.resposta = intent.getStringExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE);
         List<Button> buttons = this.createButtons();
         initButton(palavras, buttons, resposta);

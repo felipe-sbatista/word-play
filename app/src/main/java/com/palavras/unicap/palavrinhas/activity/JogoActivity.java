@@ -14,12 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.entity.Palavra;
 import com.palavras.unicap.palavrinhas.fragment.JogoFragment;
 import com.palavras.unicap.palavrinhas.fragment.LifeFragment;
 import com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment;
 import com.palavras.unicap.palavrinhas.fragment.TecladoVogalFragment;
-import com.palavras.unicap.palavrinhas.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,16 +56,22 @@ public class JogoActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         tecladoFragment = new TecladoAlfabeticoFragment();
+//        tecladoFragment = new TecladoVogalFragment();
         jogoFragment = new JogoFragment();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        androidx.fragment.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.teclado_jogo, tecladoFragment);
         transaction.add(R.id.tela_jogo, jogoFragment);
         transaction.commit();
 
-        //TODO: Ajustar o botao confirmar
-        //TODO: Ajustar life fragment
+        // TODO: Ajustar fluxo de chamada no firebase para o jogoActivity
     }
 
+
+    public void startSegundaChance(){
+//        Intent intent = new Intent(JogoActivity.this, SegundaChanceActivity.class);
+//        intent.putExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE, (Serializable) this.palavras);
+//        intent.putExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE, );
+    }
 
     public void encerrarPartida(String mensagem) {
         Intent intent = new Intent(JogoActivity.this, RegistrarActivity.class);
@@ -85,7 +91,7 @@ public class JogoActivity extends AppCompatActivity
             } else {
                 tecladoFragment = new TecladoAlfabeticoFragment();
             }
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
+           FragmentTransaction transaction =  fragmentManager.beginTransaction();
             transaction.replace(R.id.teclado_jogo, tecladoFragment);
             transaction.commit();
         };
@@ -94,8 +100,6 @@ public class JogoActivity extends AppCompatActivity
 
     @OnClick(R.id.botao_voltar)
     public void botaoVoltar(){
-        Intent intent = new Intent(JogoActivity.this, MainActivity.class);
-        startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
@@ -108,10 +112,14 @@ public class JogoActivity extends AppCompatActivity
         textUsuario.setText(palavraUsuario);
     }
 
+    public void limparPalavra(){
+        this.palavraUsuario = "";
+    }
+
 
     @Override
     public void onFragmentInteraction(String letra) {
-
+        System.out.println();
     }
 
     @Override
@@ -127,5 +135,13 @@ public class JogoActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+    }
+
+    public String getPalavraUsuario() {
+        return this.palavraUsuario;
+    }
+
+    public void setPalavras(List<Palavra> palavras){
+        this.palavras.addAll(palavras);
     }
 }

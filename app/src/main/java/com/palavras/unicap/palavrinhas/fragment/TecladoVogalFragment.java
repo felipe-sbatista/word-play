@@ -72,4 +72,5 @@ public class TecladoVogalFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(String letra);
     }
+
 }

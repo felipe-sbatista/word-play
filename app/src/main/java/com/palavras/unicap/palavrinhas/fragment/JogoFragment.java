@@ -69,7 +69,6 @@ public class JogoFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
-    private String palavraUsuario;
 
     public JogoFragment() {}
 
@@ -128,6 +127,7 @@ public class JogoFragment extends Fragment {
                     Palavra palavra = singleSnapshot.getValue(Palavra.class);
                     palavras.add(palavra);
                 }
+                ((JogoActivity)getActivity()).setPalavras(palavras);
                 //seleciona uma palavra aleatoria para exibir
                 Palavra palavraEscolhida;
                 try {
@@ -154,9 +154,9 @@ public class JogoFragment extends Fragment {
 
     @OnClick(R.id.botao_confirmar)
     public void confirmarWord() {
-        if (!this.palavraAtual.getTexto().toUpperCase().equals(this.palavraUsuario.toUpperCase())) {
+        if (!this.palavraAtual.getTexto().toUpperCase().equals(((JogoActivity)getActivity()).getPalavraUsuario().toUpperCase())) {
             FragmentManager manager = getFragmentManager();
-            LifeFragment lifeFragment = (LifeFragment) manager.findFragmentByTag("life_fragment");
+            LifeFragment lifeFragment = (LifeFragment) manager.findFragmentById(R.id.life_g);
             lifeFragment.reduzir();
             if(lifeFragment.isFinished()){
                 ((JogoActivity)getActivity()).encerrarPartida("Muito bem, continue assim!");
@@ -186,6 +186,8 @@ public class JogoFragment extends Fragment {
 
     @OnClick(R.id.botao_limpar)
     public void limparPalavra () {
+        palavraEmTela.setText("");
+        ((JogoActivity)getActivity()).limparPalavra();
     }
 
 
