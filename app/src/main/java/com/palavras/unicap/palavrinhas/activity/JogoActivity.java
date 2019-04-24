@@ -2,6 +2,7 @@ package com.palavras.unicap.palavrinhas.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -32,9 +33,9 @@ import butterknife.OnClick;
 
 public class JogoActivity extends AppCompatActivity
         implements TecladoAlfabeticoFragment.OnFragmentInteractionListener,
-                    TecladoVogalFragment.OnFragmentInteractionListener,
-                    JogoFragment.OnFragmentJogoInteraction,
-                    LifeFragment.OnFragmentInteractionListener {
+        TecladoVogalFragment.OnFragmentInteractionListener,
+        JogoFragment.OnFragmentJogoInteraction,
+        LifeFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.botao_voltar)
     ImageView botaoVoltar;
@@ -88,17 +89,32 @@ public class JogoActivity extends AppCompatActivity
 
     @OnClick(R.id.switch_teclado)
     public void switchTeclado(){
-        Runnable r = ()-> {
-            if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
-                tecladoFragment = new TecladoVogalFragment();
-            } else {
-                tecladoFragment = new TecladoAlfabeticoFragment();
+//        Runnable r = ()-> {
+//            if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
+//                tecladoFragment = new TecladoVogalFragment();
+//            } else {
+//                tecladoFragment = new TecladoAlfabeticoFragment();
+//            }
+//           FragmentTransaction transaction =  fragmentManager.beginTransaction();
+//            transaction.replace(R.id.teclado_jogo, tecladoFragment);
+//            transaction.commit();
+//        };
+//        r.run();
+
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... voids) {
+                if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
+                    tecladoFragment = new TecladoVogalFragment();
+                } else {
+                    tecladoFragment = new TecladoAlfabeticoFragment();
+                }
+                FragmentTransaction transaction =  fragmentManager.beginTransaction();
+                transaction.replace(R.id.teclado_jogo, tecladoFragment);
+                transaction.commit();
+                return null;
             }
-           FragmentTransaction transaction =  fragmentManager.beginTransaction();
-            transaction.replace(R.id.teclado_jogo, tecladoFragment);
-            transaction.commit();
-        };
-        r.run();
+        }.execute();
     }
 
     @OnClick(R.id.botao_voltar)

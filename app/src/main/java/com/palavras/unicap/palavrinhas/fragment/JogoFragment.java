@@ -3,6 +3,7 @@ package com.palavras.unicap.palavrinhas.fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -97,7 +98,15 @@ public class JogoFragment extends Fragment {
 
         player = MediaPlayer.create(getActivity(), R.raw.success);
 
-        this.fetchData();
+
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... voids) {
+                fetchData();
+                return null;
+            }
+        }.execute();
+
 
         textToSpeech = new TextToSpeech(getActivity(), status -> {
             if(status != TextToSpeech.ERROR){

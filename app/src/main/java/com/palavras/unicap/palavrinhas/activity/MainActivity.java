@@ -1,6 +1,7 @@
 package com.palavras.unicap.palavrinhas.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -25,7 +26,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        FirebaseApp.initializeApp(this);
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... voids) {
+                FirebaseApp.initializeApp(getApplicationContext());
+                return null;
+            }
+        }.execute();
+
     }
 
     @OnClick(R.id.botao_jogar)

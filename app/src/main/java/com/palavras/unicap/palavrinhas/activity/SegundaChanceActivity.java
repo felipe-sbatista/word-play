@@ -1,6 +1,7 @@
 package com.palavras.unicap.palavrinhas.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,11 +43,18 @@ public class SegundaChanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda_chance);
         ButterKnife.bind(this);
-        Intent intent = getIntent();
-        List<Palavra> palavras = (List<Palavra>) intent.getSerializableExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE);
-        this.resposta = intent.getStringExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE);
-        List<Button> buttons = this.createButtons();
-        initButton(palavras, buttons, resposta);
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... voids) {
+                Intent intent = getIntent();
+                List<Palavra> palavras = (List<Palavra>) intent.getSerializableExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE);
+                resposta = intent.getStringExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE);
+                List<Button> buttons = createButtons();
+                initButton(palavras, buttons, resposta);
+                return null;
+            }
+        }.execute();
+
     }
 
     private List<Button> createButtons(){

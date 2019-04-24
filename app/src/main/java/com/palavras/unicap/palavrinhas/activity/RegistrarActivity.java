@@ -56,12 +56,11 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
     @OnClick(R.id.botao_salvar)
     public void salvarUsuario(){
 
-        Usuario usuario = this.createUsuario();
-
 
         new AsyncTask<Void, Void, Void>(){
             @Override
             protected Void doInBackground(Void... voids) {
+                Usuario usuario = createUsuario();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference databaseReference = database.getReference(Constantes.USUARIOS_REFERENCE);
                 databaseReference.push().setValue(usuario);
