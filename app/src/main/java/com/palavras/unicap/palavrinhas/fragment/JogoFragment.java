@@ -43,7 +43,6 @@ import butterknife.OnClick;
 
 public class JogoFragment extends Fragment {
 
-
     @BindView(R.id.botao_confirmar)
     Button botaoConfirmar;
 
@@ -56,13 +55,13 @@ public class JogoFragment extends Fragment {
     @BindView(R.id.palavra_escrita)
     TextView palavraEmTela;
 
-    private int pontos = 0;
     private Palavra palavraAtual;
     private TextToSpeech textToSpeech;
     private MediaPlayer player;
     List<Palavra> palavras = new ArrayList<>();
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
+    private JogoActivity jogoActivity;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -108,6 +107,7 @@ public class JogoFragment extends Fragment {
         });
 
         ButterKnife.bind(this, view);
+        this.jogoActivity = ((JogoActivity)getActivity());
 
         return view;
     }
@@ -133,6 +133,7 @@ public class JogoFragment extends Fragment {
                 try {
                     palavraEscolhida = selectPalavra();
                     setImagem(palavraEscolhida);
+                    jogoActivity.setPalavraAtual(palavraEscolhida);
                 } catch (EndgameException e) {
                     Log.w("",e.getMessage());
                     ((JogoActivity)getActivity()).encerrarPartida("Continue tentando!");
@@ -154,19 +155,21 @@ public class JogoFragment extends Fragment {
 
     @OnClick(R.id.botao_confirmar)
     public void confirmarWord() {
-        if (!this.palavraAtual.getTexto().toUpperCase().equals(((JogoActivity)getActivity()).getPalavraUsuario().toUpperCase())) {
+        if (!this.palavraAtual.getTexto().toUpperCase().equals(jogoActivity.getPalavraUsuario().toUpperCase())) {
             FragmentManager manager = getFragmentManager();
             LifeFragment lifeFragment = (LifeFragment) manager.findFragmentById(R.id.life_g);
             lifeFragment.reduzir();
             if(lifeFragment.isFinished()){
-                ((JogoActivity)getActivity()).encerrarPartida("Muito bem, continue assim!");
+                this.jogoActivity.startSegundaChance();
+//                ((JogoActivity)getActivity()).encerrarPartida("Muito bem, continue assim!");
             }
         }else{
-            this.pontos++;
+            this.jogoActivity.incrementarPontos();
             //tocar som de acerto
             player.start();
             Palavra palavraEscolhida;
             try {
+
                 palavraEscolhida = selectPalavra();
                 setImagem(palavraEscolhida);
             } catch (EndgameException e) {
@@ -175,7 +178,6 @@ public class JogoFragment extends Fragment {
             }
         }
         limparPalavra();
-
     }
 
     @OnClick(R.id.botao_play)
@@ -201,13 +203,14 @@ public class JogoFragment extends Fragment {
             palavras.remove(posicao);
             palavraAtual = palavra;
             setImagem(palavra);
+            this.jogoActivity.setPalavraAtual(palavraAtual);
             return palavra;
         }
     }
 
     private void setImagem(Palavra palavra){
         StorageReference reference = FirebaseStorage.getInstance().getReference();
-        StorageReference realImage = reference.child(palavra.getHashImagem());
+        StorageReference realImage = reference.child(palavra.getNomeArquivo());
         realImage.getBytes(1024*1024).addOnSuccessListener(bytes -> {
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             ImageView imageView = getView().findViewById(R.id.imagemPalavra);

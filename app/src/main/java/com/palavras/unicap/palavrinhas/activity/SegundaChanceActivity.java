@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SegundaChanceActivity extends AppCompatActivity {
 
@@ -40,6 +41,7 @@ public class SegundaChanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda_chance);
+        ButterKnife.bind(this);
         Intent intent = getIntent();
         List<Palavra> palavras = (List<Palavra>) intent.getSerializableExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE);
         this.resposta = intent.getStringExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE);

@@ -74,8 +74,8 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
 
     private Usuario createUsuario(){
         Usuario usuario = new Usuario();
-        int pontuacao = getIntent().getIntExtra("pontos",0);
-        int tempo  = getIntent().getIntExtra("segundos", 0);
+        int pontuacao = getIntent().getIntExtra("Pontuacao",0);
+        int tempo  = getIntent().getIntExtra("Segundos", 0);
         TextView textView = findViewById(R.id.nome);
         usuario.setNome(String.valueOf(textView.getText()));
         usuario.setPontos(pontuacao);

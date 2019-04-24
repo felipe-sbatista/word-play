@@ -20,7 +20,9 @@ import com.palavras.unicap.palavrinhas.fragment.JogoFragment;
 import com.palavras.unicap.palavrinhas.fragment.LifeFragment;
 import com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment;
 import com.palavras.unicap.palavrinhas.fragment.TecladoVogalFragment;
+import com.palavras.unicap.palavrinhas.util.Constantes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +50,7 @@ public class JogoActivity extends AppCompatActivity
     private String palavraUsuario = "";
     private List<Palavra> palavras = new ArrayList<>();
     private int pontuacaoAtual = 0;
+    private Palavra palavraAtual = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +59,6 @@ public class JogoActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
         tecladoFragment = new TecladoAlfabeticoFragment();
-//        tecladoFragment = new TecladoVogalFragment();
         jogoFragment = new JogoFragment();
         androidx.fragment.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.teclado_jogo, tecladoFragment);
@@ -68,9 +70,10 @@ public class JogoActivity extends AppCompatActivity
 
 
     public void startSegundaChance(){
-//        Intent intent = new Intent(JogoActivity.this, SegundaChanceActivity.class);
-//        intent.putExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE, (Serializable) this.palavras);
-//        intent.putExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE, );
+        Intent intent = new Intent(JogoActivity.this, SegundaChanceActivity.class);
+        intent.putExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE, (Serializable) this.palavras);
+        intent.putExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE, palavraAtual.getTexto());
+        startActivityForResult(intent, 1);
     }
 
     public void encerrarPartida(String mensagem) {
@@ -118,9 +121,7 @@ public class JogoActivity extends AppCompatActivity
 
 
     @Override
-    public void onFragmentInteraction(String letra) {
-        System.out.println();
-    }
+    public void onFragmentInteraction(String letra) {}
 
     @Override
     public void flow() {
@@ -134,6 +135,13 @@ public class JogoActivity extends AppCompatActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(data.getBooleanExtra(Constantes.RETRY, false)){
+            FragmentManager manager = getSupportFragmentManager();
+            LifeFragment lifeFragment = (LifeFragment) manager.findFragmentById(R.id.life_g);
+            lifeFragment.restoreLife();
+        }else{
+            encerrarPartida("Continue assim!");
+        }
 
     }
 
@@ -143,5 +151,13 @@ public class JogoActivity extends AppCompatActivity
 
     public void setPalavras(List<Palavra> palavras){
         this.palavras.addAll(palavras);
+    }
+
+    public void incrementarPontos(){
+        this.pontuacaoAtual++;
+    }
+
+    public void setPalavraAtual(Palavra palavraAtual){
+        this.palavraAtual = palavraAtual;
     }
 }
