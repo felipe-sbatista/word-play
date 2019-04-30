@@ -91,7 +91,7 @@ public class LifeFragment extends Fragment {
         ImageView imageView = getView().findViewById(id);
         imageView.setVisibility(View.GONE);
         Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(VibrationEffect.createOneShot(30,VibrationEffect.DEFAULT_AMPLITUDE));
+        vibrator.vibrate(VibrationEffect.createOneShot(100,VibrationEffect.DEFAULT_AMPLITUDE));
 
     }
 
