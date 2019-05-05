@@ -1,5 +1,6 @@
 package com.palavras.unicap.palavrinhas.fragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
@@ -32,6 +33,7 @@ import com.palavras.unicap.palavrinhas.entity.Palavra;
 import com.palavras.unicap.palavrinhas.exception.EndgameException;
 import com.palavras.unicap.palavrinhas.util.Constantes;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -70,7 +72,8 @@ public class JogoFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public JogoFragment() {}
+    public JogoFragment() {
+    }
 
     public static JogoFragment newInstance(String param1, String param2) {
         JogoFragment fragment = new JogoFragment();
@@ -91,6 +94,7 @@ public class JogoFragment extends Fragment {
         }
     }
 
+    @SuppressLint("StaticFieldLeak")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -99,7 +103,7 @@ public class JogoFragment extends Fragment {
         player = MediaPlayer.create(getActivity(), R.raw.success);
 
 
-        new AsyncTask<Void, Void, Void>(){
+        new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 fetchData();
@@ -108,20 +112,27 @@ public class JogoFragment extends Fragment {
         }.execute();
 
 
-        textToSpeech = new TextToSpeech(getActivity(), status -> {
-            if(status != TextToSpeech.ERROR){
-                textToSpeech.setLanguage(new Locale("pt", "POR"));
-                textToSpeech.setSpeechRate((float) 0.5);
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                textToSpeech = new TextToSpeech(getActivity(), status -> {
+                    if (status != TextToSpeech.ERROR) {
+                        textToSpeech.setLanguage(new Locale("pt", "POR"));
+                        textToSpeech.setSpeechRate((float) 0.5);
+                    }
+                });
+                return null;
             }
-        });
+        }.execute();
+
 
         ButterKnife.bind(this, view);
-        this.jogoActivity = ((JogoActivity)getActivity());
+        this.jogoActivity = ((JogoActivity) getActivity());
 
         return view;
     }
 
-    private void fetchData(){
+    private void fetchData() {
         //start uma instancia do firebase
         this.database = FirebaseDatabase.getInstance();
 
@@ -132,21 +143,13 @@ public class JogoFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //iteração dos dados ja buscados
-                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     Palavra palavra = singleSnapshot.getValue(Palavra.class);
                     palavras.add(palavra);
                 }
-                ((JogoActivity)getActivity()).setPalavras(palavras);
+                ((JogoActivity) getActivity()).setPalavras(palavras);
                 //seleciona uma palavra aleatoria para exibir
-                Palavra palavraEscolhida;
-                try {
-                    palavraEscolhida = selectPalavra();
-                    setImagem(palavraEscolhida);
-                    jogoActivity.setPalavraAtual(palavraEscolhida);
-                } catch (EndgameException e) {
-                    Log.w("",e.getMessage());
-                    ((JogoActivity)getActivity()).encerrarPartida("Continue tentando!");
-                }
+                new SelectPalavraTask((JogoActivity) getContext()).execute();
 
             }
 
@@ -158,8 +161,8 @@ public class JogoFragment extends Fragment {
 
     }
 
-    public interface OnFragmentJogoInteraction {
-        void flow();
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(String letra);
     }
 
     @OnClick(R.id.botao_confirmar)
@@ -168,11 +171,11 @@ public class JogoFragment extends Fragment {
             FragmentManager manager = getFragmentManager();
             LifeFragment lifeFragment = (LifeFragment) manager.findFragmentById(R.id.life_g);
             lifeFragment.reduzir();
-            if(lifeFragment.isFinished()){
+            if (lifeFragment.isFinished()) {
                 this.jogoActivity.startSegundaChance();
 //                ((JogoActivity)getActivity()).encerrarPartida("Muito bem, continue assim!");
             }
-        }else{
+        } else {
             this.jogoActivity.incrementarPontos();
             //tocar som de acerto
             player.start();
@@ -182,28 +185,32 @@ public class JogoFragment extends Fragment {
                 palavraEscolhida = selectPalavra();
                 setImagem(palavraEscolhida);
             } catch (EndgameException e) {
-                Log.w("",e.getMessage());
-                ((JogoActivity)getActivity()).encerrarPartida("Continue tentando!");
+                Log.w("", e.getMessage());
+                ((JogoActivity) getActivity()).encerrarPartida("Continue tentando!");
             }
         }
         limparPalavra();
     }
 
     @OnClick(R.id.botao_play)
-    public void playWord(){
+    public void playWord() {
         botaoPlay.setOnClickListener(v ->
                 textToSpeech.speak(palavraAtual.getTexto(), TextToSpeech.QUEUE_FLUSH, null, null));
     }
 
     @OnClick(R.id.botao_limpar)
-    public void limparPalavra () {
+    public void limparPalavra() {
         palavraEmTela.setText("");
-        ((JogoActivity)getActivity()).limparPalavra();
+        ((JogoActivity) getActivity()).limparPalavra();
+    }
+
+    public void atualizarPalavra(String palavra) {
+        this.palavraEmTela.setText(palavra);
     }
 
 
     private Palavra selectPalavra() throws EndgameException {
-        if(palavras.size() == 0){
+        if (palavras.size() == 0) {
             throw new EndgameException("Sem mais palavras");
         } else {
             Random random = new Random();
@@ -217,17 +224,52 @@ public class JogoFragment extends Fragment {
         }
     }
 
-    private void setImagem(Palavra palavra){
+    private void setImagem(Palavra palavra) {
         StorageReference reference = FirebaseStorage.getInstance().getReference();
         StorageReference realImage = reference.child(palavra.getNomeArquivo());
-        realImage.getBytes(1024*1024).addOnSuccessListener(bytes -> {
+        realImage.getBytes(1024 * 1024).addOnSuccessListener(bytes -> {
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             ImageView imageView = getView().findViewById(R.id.imagemPalavra);
-            imageView.setImageBitmap(bitmap );
+            imageView.setImageBitmap(bitmap);
         });
 
 
     }
 
 
+    private class SelectPalavraTask extends AsyncTask<Void, Void, Void> {
+        private WeakReference<JogoActivity> activityReference;
+
+        SelectPalavraTask(JogoActivity context) {
+            this.activityReference = new WeakReference<>(context);
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try {
+                Palavra palavraEscolhida;
+                palavraEscolhida = selectPalavra();
+                setImagem(palavraEscolhida);
+//                            jogoActivity.setPalavraAtual(palavraEscolhida);
+            } catch (EndgameException e) {
+                Log.w("", e.getMessage());
+                JogoActivity activity = activityReference.get();
+                activity.encerrarPartida("Continue tentando!");
+            }
+            return null;
+        }
+    }
+
+
+//    @Override
+//    public void onDestroy() {
+//
+//        super.onDestroy();
+//    }
+
+    @Override
+    public void onDestroyView() {
+        this.textToSpeech.shutdown();
+        super.onDestroyView();
+    }
 }

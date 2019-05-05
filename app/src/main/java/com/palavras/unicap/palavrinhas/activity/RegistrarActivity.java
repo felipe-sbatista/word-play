@@ -31,6 +31,9 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
     @BindView(R.id.botao_salvar)
     Button botaoSalvar;
 
+    @BindView(R.id.nome)
+    TextView textView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,14 +88,13 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
 
     @Override
     public void onFragmentInteraction(String letra) {
-        nome = nome + letra;
-        TextView t = findViewById(R.id.nome);
-        t.setText(nome);
+
     }
 
     public void getClick(View view) {
         Button botao = findViewById(view.getId());
         String letra = botao.getText().toString();
-        onFragmentInteraction(letra);
+        nome = nome + letra;
+        this.textView.setText(nome);
     }
 }

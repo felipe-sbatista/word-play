@@ -31,10 +31,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class JogoActivity extends AppCompatActivity
-        implements TecladoAlfabeticoFragment.OnFragmentInteractionListener,
+public class JogoActivity extends AppCompatActivity implements
+        TecladoAlfabeticoFragment.OnFragmentInteractionListener,
         TecladoVogalFragment.OnFragmentInteractionListener,
-        JogoFragment.OnFragmentJogoInteraction,
+        JogoFragment.OnFragmentInteractionListener,
         LifeFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.botao_voltar)
@@ -66,11 +66,10 @@ public class JogoActivity extends AppCompatActivity
         transaction.add(R.id.tela_jogo, jogoFragment);
         transaction.commit();
 
-        // TODO: Ajustar fluxo de chamada no firebase para o jogoActivity
     }
 
 
-    public void startSegundaChance(){
+    public void startSegundaChance() {
         Intent intent = new Intent(JogoActivity.this, SegundaChanceActivity.class);
         intent.putExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE, (Serializable) this.palavras);
         intent.putExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE, palavraAtual.getTexto());
@@ -88,37 +87,25 @@ public class JogoActivity extends AppCompatActivity
 
 
     @OnClick(R.id.switch_teclado)
-    public void switchTeclado(){
-//        Runnable r = ()-> {
-//            if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
-//                tecladoFragment = new TecladoVogalFragment();
-//            } else {
-//                tecladoFragment = new TecladoAlfabeticoFragment();
+    public void switchTeclado() {
+//        new AsyncTask<Void, Void, Void>(){
+//            @Override
+//            protected Void doInBackground(Void... voids) {
+        if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
+            tecladoFragment = new TecladoVogalFragment();
+        } else {
+            tecladoFragment = new TecladoAlfabeticoFragment();
+        }
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.teclado_jogo, tecladoFragment);
+        transaction.commit();
+//        return null;
 //            }
-//           FragmentTransaction transaction =  fragmentManager.beginTransaction();
-//            transaction.replace(R.id.teclado_jogo, tecladoFragment);
-//            transaction.commit();
-//        };
-//        r.run();
-
-        new AsyncTask<Void, Void, Void>(){
-            @Override
-            protected Void doInBackground(Void... voids) {
-                if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
-                    tecladoFragment = new TecladoVogalFragment();
-                } else {
-                    tecladoFragment = new TecladoAlfabeticoFragment();
-                }
-                FragmentTransaction transaction =  fragmentManager.beginTransaction();
-                transaction.replace(R.id.teclado_jogo, tecladoFragment);
-                transaction.commit();
-                return null;
-            }
-        }.execute();
+//        }.execute();
     }
 
     @OnClick(R.id.botao_voltar)
-    public void botaoVoltar(){
+    public void botaoVoltar() {
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
@@ -126,36 +113,23 @@ public class JogoActivity extends AppCompatActivity
     public void getClick(View view) {
         Button botao = findViewById(view.getId());
         String letra = botao.getText().toString();
-        palavraUsuario = palavraUsuario + letra ;
-        textUsuario = findViewById(R.id.palavra_escrita);
-        textUsuario.setText(palavraUsuario);
+        palavraUsuario = palavraUsuario + letra;
+        TextView palavra = findViewById(R.id.palavra_escrita);
+        palavra.setText(palavraUsuario);
     }
 
-    public void limparPalavra(){
+    public void limparPalavra() {
         this.palavraUsuario = "";
     }
 
 
     @Override
-    public void onFragmentInteraction(String letra) {}
-
-    @Override
-    public void flow() {
-
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(data.getBooleanExtra(Constantes.RETRY, false)){
+        if (data.getBooleanExtra(Constantes.RETRY, false)) {
             FragmentManager manager = getSupportFragmentManager();
             LifeFragment lifeFragment = (LifeFragment) manager.findFragmentById(R.id.life_g);
             lifeFragment.restoreLife();
-        }else{
+        } else {
             encerrarPartida("Continue assim!");
         }
 
@@ -165,15 +139,26 @@ public class JogoActivity extends AppCompatActivity
         return this.palavraUsuario;
     }
 
-    public void setPalavras(List<Palavra> palavras){
+    public void setPalavras(List<Palavra> palavras) {
         this.palavras.addAll(palavras);
     }
 
-    public void incrementarPontos(){
+    public void incrementarPontos() {
         this.pontuacaoAtual++;
     }
 
-    public void setPalavraAtual(Palavra palavraAtual){
+    public void setPalavraAtual(Palavra palavraAtual) {
         this.palavraAtual = palavraAtual;
     }
+
+
+    @Override
+    public void onFragmentInteraction(String letra) {
+    }
+
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+    }
+
 }
