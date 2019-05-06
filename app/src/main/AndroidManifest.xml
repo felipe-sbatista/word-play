@@ -15,12 +15,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:theme="@style/AppTheme.Fullscreen"
         tools:node="replace">
-        <activity android:name=".activity.SegundaChanceActivity"></activity>
+
         <activity
             android:name=".activity.MainActivity"
-            android:screenOrientation="landscape">
+            android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,13 +29,17 @@
         </activity>
         <activity
             android:name=".activity.JogoActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".activity.RecordesActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".activity.RegistrarActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="sensorLandscape" />
+
+        <activity
+            android:name=".activity.SegundaChanceActivity"
+            android:screenOrientation="sensorLandscape"/>
     </application>
 
 </manifest>

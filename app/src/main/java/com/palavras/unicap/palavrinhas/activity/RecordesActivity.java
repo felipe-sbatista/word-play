@@ -1,5 +1,6 @@
 package com.palavras.unicap.palavrinhas.activity;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.palavras.unicap.palavrinhas.entity.Usuario;
 import com.palavras.unicap.palavrinhas.util.Constantes;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -34,6 +36,7 @@ public class RecordesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordes);
+        // TODO: CHECAR SE É MELHOR COLOCR NA MAIN THREAD
         this.fetchData();
     }
 
@@ -47,11 +50,24 @@ public class RecordesActivity extends AppCompatActivity {
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                     usuarios.add(singleSnapshot.getValue(Usuario.class));
                 }
-                createRecyclerView();
+
+                new AsyncTask<Void, Void, Void>(){
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        usuarios.sort(Comparator.comparing(Usuario::getPontos).reversed());
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        createRecyclerView();
+                    }
+                }.execute();
+
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                //TODO: Subir alguma exceção
             }
         });
     }
@@ -65,4 +81,5 @@ public class RecordesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
+
 }

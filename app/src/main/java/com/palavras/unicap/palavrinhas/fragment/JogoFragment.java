@@ -204,10 +204,6 @@ public class JogoFragment extends Fragment {
         ((JogoActivity) getActivity()).limparPalavra();
     }
 
-    public void atualizarPalavra(String palavra) {
-        this.palavraEmTela.setText(palavra);
-    }
-
 
     private Palavra selectPalavra() throws EndgameException {
         if (palavras.size() == 0) {
@@ -259,13 +255,6 @@ public class JogoFragment extends Fragment {
             return null;
         }
     }
-
-
-//    @Override
-//    public void onDestroy() {
-//
-//        super.onDestroy();
-//    }
 
     @Override
     public void onDestroyView() {
