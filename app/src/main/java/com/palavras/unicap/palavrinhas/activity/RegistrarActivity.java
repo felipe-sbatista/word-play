@@ -32,7 +32,10 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
     Button botaoSalvar;
 
     @BindView(R.id.nome)
-    TextView textView;
+    TextView textViewNome;
+
+    @BindView(R.id.botao_limpar_recordes)
+    Button botaoLimpar;
 
 
     @Override
@@ -53,6 +56,13 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         msgFinal.setText(mensagem + "\n" + pontuacao+ " - PONTOS");
 
         database = FirebaseDatabase.getInstance();
+
+    }
+
+    @OnClick(R.id.botao_limpar_recordes)
+    public void limparNome(){
+        this.nome = "";
+        this.textViewNome.setText(this.nome);
 
     }
 
@@ -95,6 +105,6 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         Button botao = findViewById(view.getId());
         String letra = botao.getText().toString();
         nome = nome + letra;
-        this.textView.setText(nome);
+        this.textViewNome.setText(nome);
     }
 }
