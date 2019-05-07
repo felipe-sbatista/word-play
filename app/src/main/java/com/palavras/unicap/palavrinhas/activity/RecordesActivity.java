@@ -1,5 +1,6 @@
 package com.palavras.unicap.palavrinhas.activity;
 
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -36,44 +37,33 @@ public class RecordesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordes);
-        // TODO: CHECAR SE É MELHOR COLOCR NA MAIN THREAD
-        this.fetchData();
+        new Thread(() -> this.fetchData()).start();
+
     }
 
-    private void fetchData(){
+    private void fetchData() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference(Constantes.USUARIOS_REFERENCE);
         Query query = reference.orderByChild(Constantes.PALAVRAS_REFERENCE);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
+                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
                     usuarios.add(singleSnapshot.getValue(Usuario.class));
                 }
-
-                new AsyncTask<Void, Void, Void>(){
-                    @Override
-                    protected Void doInBackground(Void... voids) {
-                        usuarios.sort(Comparator.comparing(Usuario::getPontos).reversed());
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void aVoid) {
-                        createRecyclerView();
-                    }
-                }.execute();
-
-
+                usuarios.sort(Comparator.comparing(Usuario::getPontos).reversed());
+                createRecyclerView();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
+
         });
     }
 
 
-    private void createRecyclerView(){
+    private void createRecyclerView() {
         recyclerView = findViewById(R.id.lista_usuarios);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setHasFixedSize(true);

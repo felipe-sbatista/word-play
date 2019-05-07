@@ -58,7 +58,7 @@ public class JogoFragment extends Fragment {
     @BindView(R.id.palavra_escrita)
     TextView palavraEmTela;
 
-    private Palavra palavraAtual;
+    private Palavra palavraAtual = new Palavra();
     private TextToSpeech textToSpeech;
     private MediaPlayer player;
     List<Palavra> palavras = new ArrayList<>();
@@ -103,14 +103,7 @@ public class JogoFragment extends Fragment {
         player = MediaPlayer.create(getActivity(), R.raw.success);
 
 
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                fetchData();
-                return null;
-            }
-        }.execute();
-
+        new Thread(()->fetchData()).start();
 
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -147,16 +140,17 @@ public class JogoFragment extends Fragment {
                     Palavra palavra = singleSnapshot.getValue(Palavra.class);
                     palavras.add(palavra);
                 }
-                ((JogoActivity) getActivity()).setPalavras(palavras);
-                //seleciona uma palavra aleatoria para exibir
-                new SelectPalavraTask((JogoActivity) getContext()).execute();
+                new Thread(() ->{
+                    ((JogoActivity) getActivity()).setPalavras(palavras);
+                    //seleciona uma palavra aleatoria para exibir
+                    new SelectPalavraTask((JogoActivity) getContext()).execute();
+                }).start();
+
 
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                //TODO: Subir alguma exceção
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
 
     }
@@ -173,7 +167,6 @@ public class JogoFragment extends Fragment {
             lifeFragment.reduzir();
             if (lifeFragment.isFinished()) {
                 this.jogoActivity.startSegundaChance();
-//                ((JogoActivity)getActivity()).encerrarPartida("Muito bem, continue assim!");
             }
         } else {
             this.jogoActivity.incrementarPontos();
@@ -181,11 +174,10 @@ public class JogoFragment extends Fragment {
             player.start();
             Palavra palavraEscolhida;
             try {
-
                 palavraEscolhida = selectPalavra();
                 setImagem(palavraEscolhida);
             } catch (EndgameException e) {
-                Log.w("", e.getMessage());
+                Log.w("Fim de jogo", e.getMessage());
                 ((JogoActivity) getActivity()).encerrarPartida("Continue tentando!");
             }
         }
@@ -194,8 +186,7 @@ public class JogoFragment extends Fragment {
 
     @OnClick(R.id.botao_play)
     public void playWord() {
-        botaoPlay.setOnClickListener(v ->
-                textToSpeech.speak(palavraAtual.getTexto(), TextToSpeech.QUEUE_FLUSH, null, null));
+        textToSpeech.speak(palavraAtual.getTexto(), TextToSpeech.QUEUE_FLUSH, null, null);
     }
 
     @OnClick(R.id.botao_limpar)
@@ -226,10 +217,10 @@ public class JogoFragment extends Fragment {
         realImage.getBytes(1024 * 1024).addOnSuccessListener(bytes -> {
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
             ImageView imageView = getView().findViewById(R.id.imagemPalavra);
-            imageView.setImageBitmap(bitmap);
+            if (imageView != null) {
+                imageView.setImageBitmap(bitmap);
+            }
         });
-
-
     }
 
 
@@ -246,7 +237,6 @@ public class JogoFragment extends Fragment {
                 Palavra palavraEscolhida;
                 palavraEscolhida = selectPalavra();
                 setImagem(palavraEscolhida);
-//                            jogoActivity.setPalavraAtual(palavraEscolhida);
             } catch (EndgameException e) {
                 Log.w("", e.getMessage());
                 JogoActivity activity = activityReference.get();

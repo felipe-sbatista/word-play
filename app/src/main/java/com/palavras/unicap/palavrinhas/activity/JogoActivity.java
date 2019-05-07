@@ -52,7 +52,7 @@ public class JogoActivity extends AppCompatActivity implements
     private List<Palavra> palavras = new ArrayList<>();
     private int pontuacaoAtual = 0;
     private Palavra palavraAtual = null;
-
+    private long startMillis;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class JogoActivity extends AppCompatActivity implements
         transaction.add(R.id.teclado_jogo, tecladoFragment);
         transaction.add(R.id.tela_jogo, jogoFragment);
         transaction.commit();
-
+        this.startMillis = System.currentTimeMillis();
     }
 
 
@@ -80,6 +80,8 @@ public class JogoActivity extends AppCompatActivity implements
         Intent intent = new Intent(JogoActivity.this, RegistrarActivity.class);
         intent.putExtra("Pontuacao", pontuacaoAtual);
         intent.putExtra("Mensagem", mensagem);
+        Long time = (System.currentTimeMillis() - this.startMillis) / 1000;
+        intent.putExtra("Segundos", time);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
@@ -88,9 +90,6 @@ public class JogoActivity extends AppCompatActivity implements
 
     @OnClick(R.id.switch_teclado)
     public void switchTeclado() {
-//        new AsyncTask<Void, Void, Void>(){
-//            @Override
-//            protected Void doInBackground(Void... voids) {
         if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
             tecladoFragment = new TecladoVogalFragment();
         } else {
@@ -99,9 +98,6 @@ public class JogoActivity extends AppCompatActivity implements
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.teclado_jogo, tecladoFragment);
         transaction.commit();
-//        return null;
-//            }
-//        }.execute();
     }
 
     @OnClick(R.id.botao_voltar)
@@ -116,6 +112,7 @@ public class JogoActivity extends AppCompatActivity implements
         palavraUsuario = palavraUsuario + letra;
         TextView palavra = findViewById(R.id.palavra_escrita);
         palavra.setText(palavraUsuario);
+
     }
 
     public void limparPalavra() {

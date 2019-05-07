@@ -24,8 +24,8 @@ import butterknife.OnClick;
 
 public class RegistrarActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
-    private int pontuacao = 0;
-    private String mensagem="", nome="";
+    private int pontuacao = 0, segundos = 0;
+    private String mensagem = "", nome = "";
     private FirebaseDatabase database;
 
     @BindView(R.id.botao_salvar)
@@ -36,6 +36,9 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
 
     @BindView(R.id.botao_limpar_recordes)
     Button botaoLimpar;
+
+    @BindView(R.id.mensagem_final)
+    TextView textViewMensagemFinal;
 
 
     @Override
@@ -51,26 +54,21 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         ft.commit();
 
         this.pontuacao = getIntent().getIntExtra("Pontuacao", 0);
-        this.mensagem = getIntent().getStringExtra("Mensagem");
-        TextView msgFinal = findViewById(R.id.mensagemFinal);
-        msgFinal.setText(mensagem + "\n" + pontuacao+ " - PONTOS");
+        textViewMensagemFinal.setText(mensagem + "\n" + pontuacao + " - PONTOS");
 
         database = FirebaseDatabase.getInstance();
 
     }
 
     @OnClick(R.id.botao_limpar_recordes)
-    public void limparNome(){
+    public void limparNome() {
         this.nome = "";
         this.textViewNome.setText(this.nome);
-
     }
 
     @OnClick(R.id.botao_salvar)
-    public void salvarUsuario(){
-
-
-        new AsyncTask<Void, Void, Void>(){
+    public void salvarUsuario() {
+        new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 Usuario usuario = createUsuario();
@@ -84,14 +82,15 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         finish();
     }
 
-    private Usuario createUsuario(){
+    private Usuario createUsuario() {
         Usuario usuario = new Usuario();
-        int pontuacao = getIntent().getIntExtra("Pontuacao",0);
-        int tempo  = getIntent().getIntExtra("Segundos", 0);
+        long time = getIntent().getLongExtra("Segundos", 0);
+        this.segundos = (int) time;
+        this.mensagem = getIntent().getStringExtra("Mensagem");
         TextView textView = findViewById(R.id.nome);
         usuario.setNome(String.valueOf(textView.getText()));
         usuario.setPontos(pontuacao);
-        usuario.setSegundos(tempo);
+        usuario.setSegundos(segundos);
         return usuario;
     }
 
