@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,9 @@ public class JogoFragment extends Fragment {
 
     @BindView(R.id.palavra_escrita)
     TextView palavraEmTela;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     private Palavra palavraAtual = new Palavra();
     private TextToSpeech textToSpeech;
@@ -103,7 +107,7 @@ public class JogoFragment extends Fragment {
         player = MediaPlayer.create(getActivity(), R.raw.success);
 
 
-        new Thread(()->fetchData()).start();
+        new Thread(() -> fetchData()).start();
 
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -132,6 +136,7 @@ public class JogoFragment extends Fragment {
         //Seleciona o grupo dos dados pela referencia
         this.databaseReference = database.getReference().child(Constantes.PALAVRAS_REFERENCE);
         Query query = databaseReference.orderByChild(Constantes.PALAVRAS_REFERENCE);
+        this.progressBar.setVisibility(View.VISIBLE);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -140,17 +145,22 @@ public class JogoFragment extends Fragment {
                     Palavra palavra = singleSnapshot.getValue(Palavra.class);
                     palavras.add(palavra);
                 }
-                new Thread(() ->{
-                    ((JogoActivity) getActivity()).setPalavras(palavras);
-                    //seleciona uma palavra aleatoria para exibir
-                    new SelectPalavraTask((JogoActivity) getContext()).execute();
-                }).start();
+                ((JogoActivity) getActivity()).setPalavras(palavras);
+                try {
+                    Palavra p = selectPalavra();
+                    setImagem(p);
+                } catch (EndgameException e) {
+                    e.printStackTrace();
+                } finally {
+                    progressBar.setVisibility(View.GONE);
+                }
 
 
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
         });
 
     }
@@ -161,6 +171,9 @@ public class JogoFragment extends Fragment {
 
     @OnClick(R.id.botao_confirmar)
     public void confirmarWord() {
+        if (this.palavraAtual.getTexto() == null || this.palavraAtual.getTexto().isEmpty()) {
+            return;
+        }
         if (!this.palavraAtual.getTexto().toUpperCase().equals(jogoActivity.getPalavraUsuario().toUpperCase())) {
             FragmentManager manager = getFragmentManager();
             LifeFragment lifeFragment = (LifeFragment) manager.findFragmentById(R.id.life_g);
@@ -223,28 +236,6 @@ public class JogoFragment extends Fragment {
         });
     }
 
-
-    private class SelectPalavraTask extends AsyncTask<Void, Void, Void> {
-        private WeakReference<JogoActivity> activityReference;
-
-        SelectPalavraTask(JogoActivity context) {
-            this.activityReference = new WeakReference<>(context);
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                Palavra palavraEscolhida;
-                palavraEscolhida = selectPalavra();
-                setImagem(palavraEscolhida);
-            } catch (EndgameException e) {
-                Log.w("", e.getMessage());
-                JogoActivity activity = activityReference.get();
-                activity.encerrarPartida("Continue tentando!");
-            }
-            return null;
-        }
-    }
 
     @Override
     public void onDestroyView() {

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -68,6 +69,11 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
 
     @OnClick(R.id.botao_salvar)
     public void salvarUsuario() {
+        if(this.textViewNome == null || this.textViewNome.getText() == null || this.textViewNome.getText().toString().isEmpty()){
+            Toast.makeText(this, "DIGITE SEU NOME PARA PODER SALVAR!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {

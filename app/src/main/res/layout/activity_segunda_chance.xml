@@ -25,9 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="108dp"
         android:layout_marginTop="72dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button_radius"
         android:onClick="getPalavraEscolhida"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/palavra3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -36,18 +38,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="88dp"
         android:background="@drawable/button_radius"
-        android:text="Button"
         android:onClick="getPalavraEscolhida"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/palavra1"
         app:layout_constraintHorizontal_bias="0.262"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/palavra2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/palavra4"
@@ -55,9 +54,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:layout_marginEnd="136dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button_radius"
         android:onClick="getPalavraEscolhida"
         android:text="Button"
+        app:layout_constraintBottom_toTopOf="@+id/palavra1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
