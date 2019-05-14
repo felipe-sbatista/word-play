@@ -71,6 +71,7 @@ public class JogoFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private JogoActivity jogoActivity;
+    private String urlFirebase = "";
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -108,8 +109,10 @@ public class JogoFragment extends Fragment {
 
         player = MediaPlayer.create(getActivity(), R.raw.success);
 
+        this.jogoActivity = ((JogoActivity) getActivity());
+        this.urlFirebase = jogoActivity.getType();
 
-        new Thread(() -> fetchData()).start();
+        new Thread(() -> fetchData(urlFirebase)).start();
 
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -124,20 +127,18 @@ public class JogoFragment extends Fragment {
             }
         }.execute();
 
-
         ButterKnife.bind(this, view);
-        this.jogoActivity = ((JogoActivity) getActivity());
 
         return view;
     }
 
-    private void fetchData() {
+    private void fetchData(String url) {
         //start uma instancia do firebase
         this.database = FirebaseDatabase.getInstance();
 
         //Seleciona o grupo dos dados pela referencia
         this.databaseReference = database.getReference().child(Constantes.PALAVRAS_REFERENCE);
-        Query query = databaseReference.orderByChild(Constantes.PALAVRAS_REFERENCE);
+        Query query = databaseReference.orderByChild(url);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -156,8 +157,7 @@ public class JogoFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
 
     }
@@ -240,7 +240,6 @@ public class JogoFragment extends Fragment {
             }
         });
     }
-
 
     @Override
     public void onDestroyView() {

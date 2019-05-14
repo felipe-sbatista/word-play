@@ -22,15 +22,14 @@ import java.util.List;
 public class LifeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private List<String> vidas = new ArrayList(Arrays.asList("vida1","vida2", "vida3"));
+    private List<String> vidas = new ArrayList(Arrays.asList("vida1", "vida2", "vida3"));
 
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public LifeFragment() {
-    }
+    public LifeFragment() {}
 
     public static LifeFragment newInstance(String param1, String param2) {
         LifeFragment fragment = new LifeFragment();
@@ -91,21 +90,18 @@ public class LifeFragment extends Fragment {
         ImageView imageView = getView().findViewById(id);
         imageView.setVisibility(View.GONE);
         Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(VibrationEffect.createOneShot(100,VibrationEffect.DEFAULT_AMPLITUDE));
-
+        vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
-    public boolean isFinished(){
+    public boolean isFinished() {
         return vidas.size() < 1;
     }
 
-
-    public void restoreLife(){
+    public void restoreLife() {
         this.vidas.add("vida1");
         int id = getResources().getIdentifier(this.vidas.get(0), "id", getActivity().getPackageName());
         ImageView imageView = getView().findViewById(id);
         imageView.setVisibility(View.VISIBLE);
-
     }
 
 }

@@ -17,7 +17,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
     }
 
-
     public void selectTypeOfWords(View view){
         Button button = findViewById(view.getId());
         String type = String.valueOf(button.getText());

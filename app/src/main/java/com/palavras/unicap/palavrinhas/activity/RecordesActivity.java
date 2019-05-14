@@ -1,7 +1,5 @@
 package com.palavras.unicap.palavrinhas.activity;
 
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;

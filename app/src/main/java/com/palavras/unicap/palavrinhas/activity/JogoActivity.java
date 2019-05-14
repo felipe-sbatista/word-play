@@ -48,17 +48,20 @@ public class JogoActivity extends AppCompatActivity implements
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private Fragment tecladoFragment;
     private Fragment jogoFragment;
-
     private String palavraUsuario = "";
     private List<Palavra> palavras = new ArrayList<>();
     private int pontuacaoAtual = 0;
     private Palavra palavraAtual = null;
     private long startMillis;
+    private String type = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
         ButterKnife.bind(this);
+        Intent intent = getIntent();
+        type = intent.getStringExtra("type");
 
         tecladoFragment = new TecladoAlfabeticoFragment();
         jogoFragment = new JogoFragment();
@@ -87,7 +90,6 @@ public class JogoActivity extends AppCompatActivity implements
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         finish();
     }
-
 
     @OnClick(R.id.switch_teclado)
     public void switchTeclado() {
@@ -157,4 +159,7 @@ public class JogoActivity extends AppCompatActivity implements
     public void onFragmentInteraction(Uri uri) {
     }
 
+    public String getType() {
+        return type;
+    }
 }
