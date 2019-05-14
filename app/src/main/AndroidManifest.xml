@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Fullscreen"
         tools:node="replace">
-
+        <activity android:name=".activity.InstrucoesActivity"></activity>
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="sensorLandscape">
@@ -36,10 +36,12 @@
         <activity
             android:name=".activity.RegistrarActivity"
             android:screenOrientation="sensorLandscape" />
-
         <activity
             android:name=".activity.SegundaChanceActivity"
-            android:screenOrientation="sensorLandscape"/>
+            android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activity.MenuActivity"
+            android:screenOrientation="sensorLandscape" />
     </application>
 
 </manifest>

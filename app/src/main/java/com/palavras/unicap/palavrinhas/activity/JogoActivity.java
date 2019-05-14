@@ -43,6 +43,7 @@ public class JogoActivity extends AppCompatActivity implements
     @BindView(R.id.switch_teclado)
     Switch botaoSwitch;
 
+
     private TextView textUsuario;
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private Fragment tecladoFragment;
@@ -97,7 +98,7 @@ public class JogoActivity extends AppCompatActivity implements
         }
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.teclado_jogo, tecladoFragment);
-        transaction.commit();
+        transaction.commitNow();
     }
 
     @OnClick(R.id.botao_voltar)
@@ -110,9 +111,7 @@ public class JogoActivity extends AppCompatActivity implements
         Button botao = findViewById(view.getId());
         String letra = botao.getText().toString();
         palavraUsuario = palavraUsuario + letra;
-        TextView palavra = findViewById(R.id.palavra_escrita);
-        palavra.setText(palavraUsuario);
-
+        ((JogoFragment)this.jogoFragment).setLetra(letra);
     }
 
     public void limparPalavra() {

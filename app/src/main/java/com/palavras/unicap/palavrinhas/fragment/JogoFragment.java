@@ -32,6 +32,7 @@ import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.activity.JogoActivity;
 import com.palavras.unicap.palavrinhas.entity.Palavra;
 import com.palavras.unicap.palavrinhas.exception.EndgameException;
+import com.palavras.unicap.palavrinhas.exception.FaileToFetchImageException;
 import com.palavras.unicap.palavrinhas.util.Constantes;
 
 import java.lang.ref.WeakReference;
@@ -61,6 +62,7 @@ public class JogoFragment extends Fragment {
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+
 
     private Palavra palavraAtual = new Palavra();
     private TextToSpeech textToSpeech;
@@ -136,7 +138,7 @@ public class JogoFragment extends Fragment {
         //Seleciona o grupo dos dados pela referencia
         this.databaseReference = database.getReference().child(Constantes.PALAVRAS_REFERENCE);
         Query query = databaseReference.orderByChild(Constantes.PALAVRAS_REFERENCE);
-        this.progressBar.setVisibility(View.VISIBLE);
+
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -147,15 +149,10 @@ public class JogoFragment extends Fragment {
                 }
                 ((JogoActivity) getActivity()).setPalavras(palavras);
                 try {
-                    Palavra p = selectPalavra();
-                    setImagem(p);
+                    setPalavra();
                 } catch (EndgameException e) {
                     e.printStackTrace();
-                } finally {
-                    progressBar.setVisibility(View.GONE);
                 }
-
-
             }
 
             @Override
@@ -163,6 +160,16 @@ public class JogoFragment extends Fragment {
             }
         });
 
+    }
+
+    public void setPalavra() throws EndgameException {
+        this.progressBar.setVisibility(View.VISIBLE);
+        try {
+            Palavra palavra = selectPalavra();
+            setImagem(palavra);
+        } finally {
+            this.progressBar.setVisibility(View.GONE);
+        }
     }
 
     public interface OnFragmentInteractionListener {
@@ -185,10 +192,8 @@ public class JogoFragment extends Fragment {
             this.jogoActivity.incrementarPontos();
             //tocar som de acerto
             player.start();
-            Palavra palavraEscolhida;
             try {
-                palavraEscolhida = selectPalavra();
-                setImagem(palavraEscolhida);
+                setPalavra();
             } catch (EndgameException e) {
                 Log.w("Fim de jogo", e.getMessage());
                 ((JogoActivity) getActivity()).encerrarPartida("Continue tentando!");
@@ -241,5 +246,9 @@ public class JogoFragment extends Fragment {
     public void onDestroyView() {
         this.textToSpeech.shutdown();
         super.onDestroyView();
+    }
+
+    public void setLetra(String letra){
+        this.palavraEmTela.setText(letra);
     }
 }

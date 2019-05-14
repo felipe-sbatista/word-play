@@ -9,8 +9,8 @@
 
     <Button
         android:id="@+id/buttonA"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
@@ -22,8 +22,8 @@
 
     <Button
         android:id="@+id/buttonE"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
@@ -33,9 +33,9 @@
 
     <Button
         android:id="@+id/buttonB"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="48dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="60dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
@@ -45,8 +45,8 @@
 
     <Button
         android:id="@+id/buttonD"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
@@ -56,8 +56,8 @@
 
     <Button
         android:id="@+id/buttonG"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
@@ -67,8 +67,8 @@
 
     <Button
         android:id="@+id/buttonC"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
@@ -78,8 +78,8 @@
 
     <Button
         android:id="@+id/buttonF"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
@@ -89,8 +89,8 @@
 
     <Button
         android:id="@+id/buttonH"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="56dp"
         android:clickable="true"
         android:onClick="getClick"
@@ -100,8 +100,8 @@
 
     <Button
         android:id="@+id/buttonI"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
@@ -112,8 +112,8 @@
 
     <Button
         android:id="@+id/buttonJ"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:padding="4dp"
@@ -123,8 +123,8 @@
 
     <Button
         android:id="@+id/buttonK"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="K"
@@ -133,8 +133,8 @@
 
     <Button
         android:id="@+id/buttonL"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="L"
@@ -143,8 +143,8 @@
 
     <Button
         android:id="@+id/buttonM"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="M"
@@ -154,8 +154,8 @@
 
     <Button
         android:id="@+id/buttonN"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="N"
@@ -164,9 +164,9 @@
 
     <Button
         android:id="@+id/buttonO"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:padding="1dp"
@@ -176,9 +176,9 @@
 
     <Button
         android:id="@+id/buttonP"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="172dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="204dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="P"
@@ -187,8 +187,8 @@
 
     <Button
         android:id="@+id/buttonQ"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:padding="1dp"
@@ -198,8 +198,8 @@
 
     <Button
         android:id="@+id/buttonR"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
 
         android:clickable="true"
         android:onClick="getClick"
@@ -209,8 +209,8 @@
 
     <Button
         android:id="@+id/buttonS"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
 
         android:clickable="true"
         android:onClick="getClick"
@@ -220,8 +220,8 @@
 
     <Button
         android:id="@+id/buttonT"
-        android:layout_width="41dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="T"
@@ -230,8 +230,8 @@
 
     <Button
         android:id="@+id/buttonU"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
 
         android:clickable="true"
         android:onClick="getClick"
@@ -241,8 +241,8 @@
 
     <Button
         android:id="@+id/buttonV"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
 
         android:clickable="true"
         android:onClick="getClick"
@@ -252,10 +252,10 @@
 
     <Button
         android:id="@+id/buttonW"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
 
-        android:layout_marginStart="212dp"
+        android:layout_marginStart="256dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="W"
@@ -264,8 +264,8 @@
 
     <Button
         android:id="@+id/buttonX"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
 
         android:clickable="true"
         android:onClick="getClick"
@@ -275,8 +275,8 @@
 
     <Button
         android:id="@+id/buttonY"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="Y"
@@ -285,8 +285,8 @@
 
     <Button
         android:id="@+id/buttonZ"
-        android:layout_width="40dp"
-        android:layout_height="36dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="Z"

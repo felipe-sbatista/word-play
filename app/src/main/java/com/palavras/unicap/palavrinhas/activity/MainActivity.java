@@ -20,8 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.botao_jogar)
     Button botaoJogar;
+
     @BindView(R.id.botao_recordes)
     Button botaoRecorde;
+
+    @BindView(R.id.botao_instrucoes)
+    Button botaoInstrucoes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.botao_recordes)
     public void recordes(){
         Intent intent = new Intent(MainActivity.this, RecordesActivity.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+    }
+
+    @OnClick(R.id.botao_instrucoes)
+    public void instrucoes(){
+        Intent intent = new Intent(MainActivity.this, InstrucoesActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
