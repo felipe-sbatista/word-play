@@ -2,7 +2,6 @@ package com.palavras.unicap.palavrinhas.activity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,33 +42,62 @@ public class JogoActivity extends AppCompatActivity implements
     @BindView(R.id.switch_teclado)
     Switch botaoSwitch;
 
-
     private TextView textUsuario;
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private Fragment tecladoFragment;
-    private Fragment jogoFragment;
+    private JogoFragment jogoFragment;
     private String palavraUsuario = "";
     private List<Palavra> palavras = new ArrayList<>();
     private int pontuacaoAtual = 0;
     private Palavra palavraAtual = null;
     private long startMillis;
-    private String type = "";
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
         ButterKnife.bind(this);
-        Intent intent = getIntent();
-        type = intent.getStringExtra("type");
+        startFragments();
 
-        tecladoFragment = new TecladoAlfabeticoFragment();
+        this.startMillis = System.currentTimeMillis();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data.getBooleanExtra(Constantes.RETRY, false)) {
+            FragmentManager manager = getSupportFragmentManager();
+            LifeFragment lifeFragment = (LifeFragment) manager.findFragmentById(R.id.life_g);
+            lifeFragment.restoreLife();
+        } else {
+            encerrarPartida("Continue assim!");
+        }
+    }
+
+    @Override
+    public void onFragmentInteraction(String letra) {}
+
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {}
+
+    public void startFragments() {
+        // set parameters for jogoFragment
         jogoFragment = new JogoFragment();
+        Bundle bundle = new Bundle();
+        Intent intent = getIntent();
+        bundle.putString("type", intent.getStringExtra("type"));
+        jogoFragment.setArguments(bundle);
+
+        //set Teclado Fragment
+        tecladoFragment = new TecladoAlfabeticoFragment();
+
+        // start fragments
         androidx.fragment.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.add(R.id.teclado_jogo, tecladoFragment);
         transaction.add(R.id.tela_jogo, jogoFragment);
-        transaction.commit();
-        this.startMillis = System.currentTimeMillis();
+        transaction.commitNow();
     }
 
 
@@ -93,14 +121,17 @@ public class JogoActivity extends AppCompatActivity implements
 
     @OnClick(R.id.switch_teclado)
     public void switchTeclado() {
-        if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
-            tecladoFragment = new TecladoVogalFragment();
-        } else {
-            tecladoFragment = new TecladoAlfabeticoFragment();
-        }
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.teclado_jogo, tecladoFragment);
-        transaction.commitNow();
+        new Thread(() -> {
+            if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
+                tecladoFragment = new TecladoVogalFragment();
+            } else {
+                tecladoFragment = new TecladoAlfabeticoFragment();
+            }
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.teclado_jogo, tecladoFragment);
+            transaction.commit();
+        }).start();
+
     }
 
     @OnClick(R.id.botao_voltar)
@@ -113,7 +144,7 @@ public class JogoActivity extends AppCompatActivity implements
         Button botao = findViewById(view.getId());
         String letra = botao.getText().toString();
         palavraUsuario = palavraUsuario + letra;
-        ((JogoFragment)this.jogoFragment).setLetra(letra);
+        this.jogoFragment.setLetra(letra);
     }
 
     public void limparPalavra() {
@@ -121,17 +152,6 @@ public class JogoActivity extends AppCompatActivity implements
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data.getBooleanExtra(Constantes.RETRY, false)) {
-            FragmentManager manager = getSupportFragmentManager();
-            LifeFragment lifeFragment = (LifeFragment) manager.findFragmentById(R.id.life_g);
-            lifeFragment.restoreLife();
-        } else {
-            encerrarPartida("Continue assim!");
-        }
-
-    }
 
     public String getPalavraUsuario() {
         return this.palavraUsuario;
@@ -150,16 +170,6 @@ public class JogoActivity extends AppCompatActivity implements
     }
 
 
-    @Override
-    public void onFragmentInteraction(String letra) {
-    }
 
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-    }
-
-    public String getType() {
-        return type;
-    }
 }

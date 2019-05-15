@@ -32,10 +32,8 @@ import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.activity.JogoActivity;
 import com.palavras.unicap.palavrinhas.entity.Palavra;
 import com.palavras.unicap.palavrinhas.exception.EndgameException;
-import com.palavras.unicap.palavrinhas.exception.FaileToFetchImageException;
 import com.palavras.unicap.palavrinhas.util.Constantes;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -71,37 +69,28 @@ public class JogoFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private JogoActivity jogoActivity;
-    private String urlFirebase = "";
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private String mParam1;
-    private String mParam2;
+    private String typeParam;
 
     public JogoFragment() {
     }
 
-    public static JogoFragment newInstance(String param1, String param2) {
-        JogoFragment fragment = new JogoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            typeParam = getArguments().getString("type");
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
+    @Override
+    public void onDestroyView() {
+        this.textToSpeech.shutdown();
+        super.onDestroyView();
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -110,34 +99,28 @@ public class JogoFragment extends Fragment {
         player = MediaPlayer.create(getActivity(), R.raw.success);
 
         this.jogoActivity = ((JogoActivity) getActivity());
-        this.urlFirebase = jogoActivity.getType();
 
-        new Thread(() -> fetchData(urlFirebase)).start();
+        new Thread(() -> fetchData(typeParam)).start();
 
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... voids) {
-                textToSpeech = new TextToSpeech(getActivity(), status -> {
-                    if (status != TextToSpeech.ERROR) {
-                        textToSpeech.setLanguage(new Locale("pt", "POR"));
-                        textToSpeech.setSpeechRate((float) 0.5);
-                    }
-                });
-                return null;
+        textToSpeech = new TextToSpeech(getActivity(), status -> {
+            if (status != TextToSpeech.ERROR) {
+                textToSpeech.setLanguage(new Locale("pt", "POR"));
+                textToSpeech.setSpeechRate((float) 0.5);
             }
-        }.execute();
+        });
 
         ButterKnife.bind(this, view);
 
         return view;
     }
 
+
     private void fetchData(String url) {
         //start uma instancia do firebase
         this.database = FirebaseDatabase.getInstance();
 
         //Seleciona o grupo dos dados pela referencia
-        this.databaseReference = database.getReference().child(Constantes.PALAVRAS_REFERENCE);
+        this.databaseReference = database.getReference(Constantes.PALAVRAS_REFERENCE).child(url);
         Query query = databaseReference.orderByChild(url);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -157,7 +140,8 @@ public class JogoFragment extends Fragment {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
         });
 
     }
@@ -241,13 +225,10 @@ public class JogoFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onDestroyView() {
-        this.textToSpeech.shutdown();
-        super.onDestroyView();
-    }
 
-    public void setLetra(String letra){
-        this.palavraEmTela.setText(letra);
+    public void setLetra(String letra) {
+        String palavra = String.valueOf(this.palavraEmTela.getText());
+        palavra = palavra + letra;
+        this.palavraEmTela.setText(palavra);
     }
 }

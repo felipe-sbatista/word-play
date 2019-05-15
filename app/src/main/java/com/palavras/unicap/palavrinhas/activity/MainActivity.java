@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.botao_jogar)
     public void jogar(){
-        Intent intent = new Intent(MainActivity.this, JogoActivity.class);
+        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
         startActivity(intent);
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
