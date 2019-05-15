@@ -72,13 +72,13 @@ public class JogoFragment extends Fragment {
 
     private String typeParam;
 
-    public JogoFragment() {
-    }
+    public JogoFragment() {}
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.jogoActivity = ((JogoActivity) getActivity());
         if (getArguments() != null) {
             typeParam = getArguments().getString("type");
         }
@@ -97,8 +97,6 @@ public class JogoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_jogo, container, false);
 
         player = MediaPlayer.create(getActivity(), R.raw.success);
-
-        this.jogoActivity = ((JogoActivity) getActivity());
 
         new Thread(() -> fetchData(typeParam)).start();
 
@@ -156,9 +154,7 @@ public class JogoFragment extends Fragment {
         }
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String letra);
-    }
+    public interface OnFragmentInteractionListener {}
 
     @OnClick(R.id.botao_confirmar)
     public void confirmarWord() {
@@ -224,7 +220,6 @@ public class JogoFragment extends Fragment {
             }
         });
     }
-
 
     public void setLetra(String letra) {
         String palavra = String.valueOf(this.palavraEmTela.getText());

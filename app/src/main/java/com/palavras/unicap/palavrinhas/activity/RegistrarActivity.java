@@ -100,12 +100,6 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         return usuario;
     }
 
-
-    @Override
-    public void onFragmentInteraction(String letra) {
-
-    }
-
     public void getClick(View view) {
         Button botao = findViewById(view.getId());
         String letra = botao.getText().toString();

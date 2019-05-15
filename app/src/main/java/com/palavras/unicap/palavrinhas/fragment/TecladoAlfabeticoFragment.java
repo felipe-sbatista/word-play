@@ -19,20 +19,10 @@ public class TecladoAlfabeticoFragment extends Fragment {
     private String mParam2;
 
 
-
     private OnFragmentInteractionListener mListener;
 
     public TecladoAlfabeticoFragment() {
         // Required empty public constructor
-    }
-
-    public static TecladoAlfabeticoFragment newInstance(String param1, String param2) {
-        TecladoAlfabeticoFragment fragment = new TecladoAlfabeticoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -45,16 +35,9 @@ public class TecladoAlfabeticoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_teclado, container, false);
-    }
-
-    public void onButtonPressed(String letra) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(letra);
-        }
     }
 
     @Override
@@ -74,8 +57,6 @@ public class TecladoAlfabeticoFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String letra);
-    }
+    public interface OnFragmentInteractionListener {}
 
 }

@@ -42,7 +42,6 @@ public class JogoActivity extends AppCompatActivity implements
     @BindView(R.id.switch_teclado)
     Switch botaoSwitch;
 
-    private TextView textUsuario;
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private Fragment tecladoFragment;
     private JogoFragment jogoFragment;
@@ -51,15 +50,13 @@ public class JogoActivity extends AppCompatActivity implements
     private int pontuacaoAtual = 0;
     private Palavra palavraAtual = null;
     private long startMillis;
-    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogo);
         ButterKnife.bind(this);
-        startFragments();
-
+        this.startFragments();
         this.startMillis = System.currentTimeMillis();
     }
 
@@ -74,13 +71,6 @@ public class JogoActivity extends AppCompatActivity implements
             encerrarPartida("Continue assim!");
         }
     }
-
-    @Override
-    public void onFragmentInteraction(String letra) {}
-
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {}
 
     public void startFragments() {
         // set parameters for jogoFragment
@@ -99,7 +89,6 @@ public class JogoActivity extends AppCompatActivity implements
         transaction.add(R.id.tela_jogo, jogoFragment);
         transaction.commitNow();
     }
-
 
     public void startSegundaChance() {
         Intent intent = new Intent(JogoActivity.this, SegundaChanceActivity.class);
@@ -150,8 +139,6 @@ public class JogoActivity extends AppCompatActivity implements
     public void limparPalavra() {
         this.palavraUsuario = "";
     }
-
-
 
     public String getPalavraUsuario() {
         return this.palavraUsuario;

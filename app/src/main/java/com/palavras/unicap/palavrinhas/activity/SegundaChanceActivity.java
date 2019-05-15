@@ -35,7 +35,6 @@ public class SegundaChanceActivity extends AppCompatActivity {
     Button palavra4;
 
 
-
     private String resposta = "";
 
     @Override
@@ -43,7 +42,7 @@ public class SegundaChanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda_chance);
         ButterKnife.bind(this);
-        new AsyncTask<Void, Void, Void>(){
+        new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 Intent intent = getIntent();
@@ -54,21 +53,18 @@ public class SegundaChanceActivity extends AppCompatActivity {
                 return null;
             }
         }.execute();
-
     }
 
-    private List<Button> createButtons(){
+    private List<Button> createButtons() {
         List<Button> buttons = new ArrayList<>();
         buttons.add(palavra1);
         buttons.add(palavra2);
         buttons.add(palavra3);
         buttons.add(palavra4);
         return buttons;
-
     }
 
-    private void initButton(List<Palavra> palavras, List<Button> buttons, String resposta){
-
+    private void initButton(List<Palavra> palavras, List<Button> buttons, String resposta) {
         //Define o botão que irá ficar a resposta
         Random random = new Random();
         int posicao = random.nextInt(buttons.size());
@@ -78,14 +74,14 @@ public class SegundaChanceActivity extends AppCompatActivity {
 
 
         //Define os demais botoes
-        for (Button btn: buttons) {
+        for (Button btn : buttons) {
             int limit = 0;
 
             //Não permite repetir uma palavra selecionada com a resposta
-            do{
+            do {
                 posicao = random.nextInt(palavras.size());
                 limit++;
-            } while(palavras.get(posicao).equals(resposta) && limit < 40);
+            } while (palavras.get(posicao).equals(resposta) && limit < 40);
 
             String palavra = palavras.get(posicao).getTexto();
             btn.setText(palavra);
@@ -94,11 +90,11 @@ public class SegundaChanceActivity extends AppCompatActivity {
     }
 
 
-    public void getPalavraEscolhida(View view){
+    public void getPalavraEscolhida(View view) {
         Button button = findViewById(view.getId());
         String palavra = button.getText().toString();
         Intent intent = new Intent();
-        if(palavra.equals(this.resposta)){
+        if (palavra.equals(this.resposta)) {
             intent.putExtra(Constantes.RETRY, true);
         } else {
             intent.putExtra(Constantes.RETRY, false);
