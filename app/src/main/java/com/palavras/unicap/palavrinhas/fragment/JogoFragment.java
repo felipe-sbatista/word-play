@@ -218,6 +218,8 @@ public class JogoFragment extends Fragment {
             if (imageView != null) {
                 imageView.setImageBitmap(bitmap);
             }
+            bitmap = null;
+            System.gc();
         });
     }
 

@@ -8,7 +8,7 @@
     android:layout_height="wrap_content"
     tools:context=".fragment.LifeFragment"
     android:tag="life_fragment"
-    android:background="#fffd82">
+    android:background="@color/background">
 
     <ImageView
         android:id="@+id/vida3"

@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Fullscreen"
         tools:node="replace">
-        <activity android:name=".activity.InstrucoesActivity"></activity>
+
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="sensorLandscape">
@@ -42,6 +42,9 @@
         <activity
             android:name=".activity.MenuActivity"
             android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activity.InstrucoesActivity"
+            android:screenOrientation="sensorLandscape"/>
     </application>
 
 </manifest>

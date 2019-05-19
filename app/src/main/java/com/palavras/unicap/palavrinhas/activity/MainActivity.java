@@ -1,13 +1,14 @@
 package com.palavras.unicap.palavrinhas.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import com.google.firebase.FirebaseApp;
 import com.palavras.unicap.palavrinhas.R;
@@ -32,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+//        ConstraintLayout layout = findViewById(R.id.main_layout);
+//        SharedPreferences.Editor edit = getSharedPreferences("user_preferences", MODE_PRIVATE).edit();
+//        edit.putString("teste", "felipe");
+//        edit.commit();
+//        layout.setBackground(ContextCompat.getDrawable(this, R.drawable.custom_button));
         new AsyncTask<Void, Void, Void>(){
             @Override
             protected Void doInBackground(Void... voids) {
