@@ -38,13 +38,13 @@ public class MainActivity extends AppCompatActivity {
 //        edit.putString("teste", "felipe");
 //        edit.commit();
 //        layout.setBackground(ContextCompat.getDrawable(this, R.drawable.custom_button));
-        new AsyncTask<Void, Void, Void>(){
-            @Override
-            protected Void doInBackground(Void... voids) {
-                FirebaseApp.initializeApp(getApplicationContext());
-                return null;
-            }
-        }.execute();
+//        new AsyncTask<Void, Void, Void>(){
+//            @Override
+//            protected Void doInBackground(Void... voids) {
+//                FirebaseApp.initializeApp(getApplicationContext());
+//                return null;
+//            }
+//        }.execute();
 
     }
 

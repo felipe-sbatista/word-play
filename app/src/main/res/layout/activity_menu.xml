@@ -5,23 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.MenuActivity"
-    android:background="#fffd82">
+    android:background="@color/background">
 
     <Button
         android:id="@+id/topico1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="116dp"
+        android:layout_marginEnd="120dp"
         android:layout_marginBottom="108dp"
         android:background="@drawable/button_radius"
         android:onClick="selectTypeOfWords"
-        android:text="Palavras com RR"
+        android:text="Palavras com R e RR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topico4"
-        app:layout_constraintVertical_bias="0.484"
-        tools:text="Palavras com RR" />
+        app:layout_constraintTop_toBottomOf="@+id/topico5"
+         />
 
     <Button
         android:id="@+id/topico2"
@@ -29,12 +28,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="88dp"
         android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/button_radius"
         android:onClick="selectTypeOfWords"
-        android:text="Palavras terminas em U-L"
+        android:text="Palavras com B e D"
+        app:layout_constraintEnd_toStartOf="@+id/topico4"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Palavras terminas em U" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/topico3"
@@ -46,26 +47,42 @@
         android:layout_marginBottom="112dp"
         android:background="@drawable/button_radius"
         android:onClick="selectTypeOfWords"
-        android:text="Palavras com LH"
+        android:text="Palavras com A &amp; E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/topico1"
         app:layout_constraintHorizontal_bias="0.426"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topico2"
-        app:layout_constraintVertical_bias="0.505"
-        tools:text="Palavras com LH" />
+        app:layout_constraintTop_toBottomOf="@+id/topico5"
+         />
 
     <Button
         android:id="@+id/topico4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
-        android:layout_marginEnd="124dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="96dp"
         android:background="@drawable/button_radius"
         android:onClick="selectTypeOfWords"
-        android:text="Palavras com S"
+        android:text="Palavras com R no final"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/topico5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_radius"
+        android:onClick="selectTypeOfWords"
+        android:text="Palavras com P e B"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Palavras com S" />
+        app:layout_constraintVertical_bias="0.458" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

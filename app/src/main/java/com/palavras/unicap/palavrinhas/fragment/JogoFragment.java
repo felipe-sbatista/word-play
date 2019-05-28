@@ -65,7 +65,7 @@ public class JogoFragment extends Fragment {
     private Palavra palavraAtual = new Palavra();
     private TextToSpeech textToSpeech;
     private MediaPlayer player;
-    List<Palavra> palavras = new ArrayList<>();
+    private List<Palavra> palavras = new ArrayList<>();
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private JogoActivity jogoActivity;

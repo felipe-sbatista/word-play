@@ -72,7 +72,7 @@ public class JogoActivity extends AppCompatActivity implements
         }
     }
 
-    public void startFragments() {
+    private void startFragments() {
         // set parameters for jogoFragment
         jogoFragment = new JogoFragment();
         Bundle bundle = new Bundle();
