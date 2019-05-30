@@ -50,6 +50,7 @@ public class JogoActivity extends AppCompatActivity implements
     private int pontuacaoAtual = 0;
     private Palavra palavraAtual = null;
     private long startMillis;
+    private int tentativas = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,10 +92,13 @@ public class JogoActivity extends AppCompatActivity implements
     }
 
     public void startSegundaChance() {
-        Intent intent = new Intent(JogoActivity.this, SegundaChanceActivity.class);
-        intent.putExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE, (Serializable) this.palavras);
-        intent.putExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE, palavraAtual.getTexto());
-        startActivityForResult(intent, 1);
+        if (tentativas <= 2) {
+            Intent intent = new Intent(JogoActivity.this, SegundaChanceActivity.class);
+            intent.putExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE, palavraAtual.getTexto());
+            startActivityForResult(intent, 1);
+        } else {
+            encerrarPartida("Continue assim!");
+        }
     }
 
     public void encerrarPartida(String mensagem) {
@@ -155,8 +159,6 @@ public class JogoActivity extends AppCompatActivity implements
     public void setPalavraAtual(Palavra palavraAtual) {
         this.palavraAtual = palavraAtual;
     }
-
-
 
 
 }
