@@ -33,18 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-//        ConstraintLayout layout = findViewById(R.id.main_layout);
-//        SharedPreferences.Editor edit = getSharedPreferences("user_preferences", MODE_PRIVATE).edit();
-//        edit.putString("teste", "felipe");
-//        edit.commit();
-//        layout.setBackground(ContextCompat.getDrawable(this, R.drawable.custom_button));
-//        new AsyncTask<Void, Void, Void>(){
-//            @Override
-//            protected Void doInBackground(Void... voids) {
-//                FirebaseApp.initializeApp(getApplicationContext());
-//                return null;
-//            }
-//        }.execute();
 
     }
 

@@ -22,7 +22,7 @@ import java.util.List;
 public class LifeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private List<String> vidas = new ArrayList(Arrays.asList("vida1", "vida2", "vida3"));
+    private List<String> vidas = new ArrayList<>(Arrays.asList("vida1", "vida2", "vida3"));
 
     private OnFragmentInteractionListener mListener;
 
@@ -67,7 +67,7 @@ public class LifeFragment extends Fragment {
         ImageView imageView = getView().findViewById(id);
         imageView.setVisibility(View.GONE);
         Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        vibrator.vibrate(VibrationEffect.createOneShot(350, VibrationEffect.DEFAULT_AMPLITUDE));
     }
 
     public boolean isFinished() {

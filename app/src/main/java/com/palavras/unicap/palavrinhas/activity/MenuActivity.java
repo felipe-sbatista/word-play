@@ -37,7 +37,7 @@ public class MenuActivity extends AppCompatActivity {
             case Constantes.PALAVRAS_P_B:
                 return Constantes.PALAVRAS_P_B_PATH;
             case Constantes.PALAVRAS_R_FINAL:
-                return Constantes.PALAVRAS_R_FINAL;
+                return Constantes.PALAVRAS_R_FINAL_PATH;
             case Constantes.PALAVRAS_RR_R:
                 return Constantes.PALAVRAS_RR_R_PATH;
             default:

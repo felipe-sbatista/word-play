@@ -16,7 +16,7 @@ public interface Constantes {
     // BUTTON PALAVRAS
     String PALAVRAS_B_D = "Palavras com B e D";
     String PALAVRAS_RR_R = "Palavras com R e RR";
-    String PALAVRAS_A_E = "Palavras com A e E";
+    String PALAVRAS_A_E = "Palavras com A & E";
     String PALAVRAS_R_FINAL = "Palavras com R no final";
     String PALAVRAS_P_B = "Palavras com P e B";
 

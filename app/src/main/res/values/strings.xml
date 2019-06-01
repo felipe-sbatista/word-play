@@ -7,5 +7,7 @@
     <string name="digite_seu_nome">Digite seu nome:</string>
     <string name="limpar">Limpar</string>
     <string name="mensagem">Mensagem</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="desistir">DESISTIR</string>
 
 </resources>

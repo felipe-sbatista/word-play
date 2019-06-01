@@ -4,10 +4,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -26,7 +28,7 @@ import butterknife.OnClick;
 public class RegistrarActivity extends AppCompatActivity implements OnFragmentInteractionListener {
 
     private int pontuacao = 0, segundos = 0;
-    private String mensagem = "", nome = "";
+    private String nome = "";
     private FirebaseDatabase database;
 
     @BindView(R.id.botao_salvar)
@@ -35,11 +37,14 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
     @BindView(R.id.nome)
     TextView textViewNome;
 
+    @BindView(R.id.pontuacao)
+    TextView textViewPontuacao;
+
     @BindView(R.id.botao_limpar_recordes)
     Button botaoLimpar;
 
-    @BindView(R.id.mensagem_final)
-    TextView textViewMensagemFinal;
+    @BindView(R.id.teclado_image)
+    ImageView tecladoImage;
 
 
     @Override
@@ -55,8 +60,13 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         ft.commit();
 
         this.pontuacao = getIntent().getIntExtra("Pontuacao", 0);
-        textViewMensagemFinal.setText(mensagem + "\n" + pontuacao + " - PONTOS");
-
+        String pontos = this.pontuacao + " Pontos";
+        textViewPontuacao.setText(pontos);
+        if (getIntent().getBooleanExtra("isWinner", false)) {
+            tecladoImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.image_final_win));
+        } else {
+            tecladoImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.image_final_lose));
+        }
         database = FirebaseDatabase.getInstance();
 
     }
@@ -69,7 +79,7 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
 
     @OnClick(R.id.botao_salvar)
     public void salvarUsuario() {
-        if(this.textViewNome == null || this.textViewNome.getText() == null || this.textViewNome.getText().toString().isEmpty()){
+        if (this.textViewNome == null || this.textViewNome.getText() == null || this.textViewNome.getText().toString().isEmpty()) {
             Toast.makeText(this, "DIGITE SEU NOME PARA PODER SALVAR!", Toast.LENGTH_LONG).show();
             return;
         }
@@ -92,7 +102,7 @@ public class RegistrarActivity extends AppCompatActivity implements OnFragmentIn
         Usuario usuario = new Usuario();
         long time = getIntent().getLongExtra("Segundos", 0);
         this.segundos = (int) time;
-        this.mensagem = getIntent().getStringExtra("Mensagem");
+
         TextView textView = findViewById(R.id.nome);
         usuario.setNome(String.valueOf(textView.getText()));
         usuario.setPontos(pontuacao);

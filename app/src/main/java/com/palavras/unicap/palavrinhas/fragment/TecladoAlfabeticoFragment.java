@@ -57,6 +57,8 @@ public class TecladoAlfabeticoFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {}
+    public interface OnFragmentInteractionListener {
+        void getClick(View view);
+    }
 
 }

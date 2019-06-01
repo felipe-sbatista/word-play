@@ -12,35 +12,35 @@
         android:id="@+id/jo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="276dp"
+        android:layout_marginTop="8dp"
         android:text="@string/digite_seu_nome"
         android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mensagem_final" />
+        app:layout_constraintTop_toBottomOf="@+id/pontuacao" />
 
     <TextView
         android:id="@+id/nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="8dp"
         android:text=""
         android:textSize="32sp"
         app:layout_constraintStart_toEndOf="@+id/jo"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/pontuacao"
+        tools:text="FELIPE" />
 
     <Button
         android:id="@+id/botao_salvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="216dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/button_radius"
         android:text="@string/salvar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toEndOf="@+id/teclado"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,24 +56,10 @@
         android:text="@string/limpar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.391"
         app:layout_constraintStart_toEndOf="@+id/teclado"
         app:layout_constraintTop_toBottomOf="@+id/botao_salvar"
         app:layout_constraintVertical_bias="0.285" />
 
-    <TextView
-        android:id="@+id/mensagem_final"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/mensagem"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
         android:id="@+id/teclado"
@@ -86,7 +72,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/jo"
+        app:layout_constraintVertical_bias="1.0"
         tools:layout="@layout/fragment_teclado" />
+
+    <ImageView
+        android:id="@+id/teclado_image"
+        android:layout_width="242dp"
+        android:layout_height="157dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/pontuacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="56dp"
+        android:textSize="32sp"
+        app:layout_constraintStart_toEndOf="@+id/teclado_image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="50 pontos" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
