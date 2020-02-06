@@ -50,6 +50,7 @@ public class JogoActivity extends AppCompatActivity implements
     private int pontuacaoAtual = 0;
     private Palavra palavraAtual = null;
     private long startMillis;
+    private int tentativas = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,12 +68,14 @@ public class JogoActivity extends AppCompatActivity implements
             FragmentManager manager = getSupportFragmentManager();
             LifeFragment lifeFragment = (LifeFragment) manager.findFragmentById(R.id.life_g);
             lifeFragment.restoreLife();
+            incrementarPontos();
+            jogoFragment.setPalavra();
         } else {
-            encerrarPartida("Continue assim!");
+            encerrarPartida(false);
         }
     }
 
-    public void startFragments() {
+    private void startFragments() {
         // set parameters for jogoFragment
         jogoFragment = new JogoFragment();
         Bundle bundle = new Bundle();
@@ -91,16 +94,20 @@ public class JogoActivity extends AppCompatActivity implements
     }
 
     public void startSegundaChance() {
-        Intent intent = new Intent(JogoActivity.this, SegundaChanceActivity.class);
-        intent.putExtra(Constantes.PALAVRAS_SEGUNDA_CHANCE, (Serializable) this.palavras);
-        intent.putExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE, palavraAtual.getTexto());
-        startActivityForResult(intent, 1);
+        if (tentativas <= 2) {
+            Intent intent = new Intent(JogoActivity.this, SegundaChanceActivity.class);
+            intent.putExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE, palavraAtual.getTexto());
+            startActivityForResult(intent, 1);
+            tentativas++;
+        } else {
+            encerrarPartida(false);
+        }
     }
 
-    public void encerrarPartida(String mensagem) {
+    public void encerrarPartida(boolean isWinner) {
         Intent intent = new Intent(JogoActivity.this, RegistrarActivity.class);
         intent.putExtra("Pontuacao", pontuacaoAtual);
-        intent.putExtra("Mensagem", mensagem);
+        intent.putExtra("isWinner", isWinner);
         Long time = (System.currentTimeMillis() - this.startMillis) / 1000;
         intent.putExtra("Segundos", time);
         startActivity(intent);
@@ -108,8 +115,8 @@ public class JogoActivity extends AppCompatActivity implements
         finish();
     }
 
-    @OnClick(R.id.switch_teclado)
-    public void switchTeclado() {
+//    @OnClick(R.id.switch_teclado)
+    public void switchTeclado(View view) {
         new Thread(() -> {
             if (tecladoFragment instanceof TecladoAlfabeticoFragment) {
                 tecladoFragment = new TecladoVogalFragment();
@@ -155,8 +162,6 @@ public class JogoActivity extends AppCompatActivity implements
     public void setPalavraAtual(Palavra palavraAtual) {
         this.palavraAtual = palavraAtual;
     }
-
-
 
 
 }

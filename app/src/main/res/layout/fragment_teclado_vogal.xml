@@ -5,16 +5,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context=".fragment.TecladoVogalFragment"
-    android:background="#fffd82">
+    android:background="@color/background">
 
     <Button
         android:id="@+id/buttonA"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="A"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,8 +23,9 @@
 
     <Button
         android:id="@+id/buttonE"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:background="@drawable/custom_button"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
@@ -33,10 +35,11 @@
 
     <Button
         android:id="@+id/buttonB"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="60dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="68dp"
         android:layout_marginTop="4dp"
+        android:background="@drawable/custom_button"
         android:clickable="true"
         android:onClick="getClick"
         android:text="B"
@@ -45,66 +48,72 @@
 
     <Button
         android:id="@+id/buttonD"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="D"
         app:layout_constraintStart_toEndOf="@+id/buttonC"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonG"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="G"
         app:layout_constraintStart_toEndOf="@+id/buttonF"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonC"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="C"
         app:layout_constraintStart_toEndOf="@+id/buttonB"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonF"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="F"
         app:layout_constraintStart_toEndOf="@+id/buttonD"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonH"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginStart="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="H"
         app:layout_constraintStart_toEndOf="@+id/buttonU"
         app:layout_constraintTop_toBottomOf="@+id/buttonB" />
 
     <Button
         android:id="@+id/buttonI"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginTop="4dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="I"
         app:layout_constraintStart_toEndOf="@+id/buttonE"
         app:layout_constraintTop_toTopOf="parent" />
@@ -112,10 +121,11 @@
 
     <Button
         android:id="@+id/buttonJ"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:padding="4dp"
         android:text="J"
         app:layout_constraintStart_toEndOf="@+id/buttonH"
@@ -123,30 +133,33 @@
 
     <Button
         android:id="@+id/buttonK"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="K"
         app:layout_constraintStart_toEndOf="@+id/buttonJ"
         app:layout_constraintTop_toBottomOf="@+id/buttonD" />
 
     <Button
         android:id="@+id/buttonL"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="L"
         app:layout_constraintStart_toEndOf="@+id/buttonK"
         app:layout_constraintTop_toBottomOf="@+id/buttonF" />
 
     <Button
         android:id="@+id/buttonM"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="M"
         app:layout_constraintStart_toEndOf="@+id/buttonL"
         app:layout_constraintTop_toBottomOf="@+id/buttonF" />
@@ -154,19 +167,21 @@
 
     <Button
         android:id="@+id/buttonN"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="N"
         app:layout_constraintStart_toEndOf="@+id/buttonM"
         app:layout_constraintTop_toBottomOf="@+id/buttonG" />
 
     <Button
         android:id="@+id/buttonO"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="56dp"
+        android:background="@drawable/custom_button"
         android:clickable="true"
         android:onClick="getClick"
         android:padding="1dp"
@@ -176,9 +191,10 @@
 
     <Button
         android:id="@+id/buttonP"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="204dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="224dp"
+        android:background="@drawable/custom_button"
         android:clickable="true"
         android:onClick="getClick"
         android:text="P"
@@ -187,10 +203,11 @@
 
     <Button
         android:id="@+id/buttonQ"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:padding="1dp"
         android:text="Q"
         app:layout_constraintStart_toEndOf="@+id/buttonP"
@@ -198,64 +215,70 @@
 
     <Button
         android:id="@+id/buttonR"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="R"
         app:layout_constraintStart_toEndOf="@+id/buttonQ"
         app:layout_constraintTop_toBottomOf="@+id/buttonK" />
 
     <Button
         android:id="@+id/buttonS"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="S"
         app:layout_constraintStart_toEndOf="@+id/buttonR"
         app:layout_constraintTop_toBottomOf="@+id/buttonL" />
 
     <Button
         android:id="@+id/buttonT"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="T"
         app:layout_constraintStart_toEndOf="@+id/buttonS"
         app:layout_constraintTop_toBottomOf="@+id/buttonM" />
 
     <Button
         android:id="@+id/buttonU"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="U"
         app:layout_constraintStart_toEndOf="@+id/buttonO"
         app:layout_constraintTop_toBottomOf="@+id/buttonE" />
 
     <Button
         android:id="@+id/buttonV"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="V"
         app:layout_constraintStart_toEndOf="@+id/buttonT"
         app:layout_constraintTop_toBottomOf="@+id/buttonN" />
 
     <Button
         android:id="@+id/buttonW"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
-        android:layout_marginStart="256dp"
+        android:layout_marginStart="280dp"
+        android:background="@drawable/custom_button"
         android:clickable="true"
         android:onClick="getClick"
         android:text="W"
@@ -264,31 +287,34 @@
 
     <Button
         android:id="@+id/buttonX"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
 
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="X"
         app:layout_constraintStart_toEndOf="@+id/buttonW"
         app:layout_constraintTop_toBottomOf="@+id/buttonR" />
 
     <Button
         android:id="@+id/buttonY"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="Y"
         app:layout_constraintStart_toEndOf="@+id/buttonX"
         app:layout_constraintTop_toBottomOf="@+id/buttonS" />
 
     <Button
         android:id="@+id/buttonZ"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:clickable="true"
         android:onClick="getClick"
+        android:background="@drawable/custom_button"
         android:text="Z"
         app:layout_constraintStart_toEndOf="@+id/buttonY"
         app:layout_constraintTop_toBottomOf="@+id/buttonT" />

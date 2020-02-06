@@ -13,7 +13,8 @@
         android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="8dp"
-        app:cardBackgroundColor="#FA8072"
+        android:layout_marginStart="3dp"
+        app:cardBackgroundColor="@color/jogoBackground"
         app:cardCornerRadius="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,9 +47,8 @@
                 android:layout_height="36dp"
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="8dp"
-
                 android:background="#60d394"
-                android:text="Confimar"
+                android:text="@string/confirmar"
                 app:layout_constraintBottom_toTopOf="@+id/botao_limpar"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -60,7 +60,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginBottom="8dp"
                 android:background="#ffc857"
-                android:text="Limpar"
+                android:text="@string/limpar"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

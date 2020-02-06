@@ -1,10 +1,8 @@
 package com.palavras.unicap.palavrinhas.fragment;
 
-import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -20,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.activity.JogoActivity;
@@ -65,14 +65,14 @@ public class JogoFragment extends Fragment {
     private Palavra palavraAtual = new Palavra();
     private TextToSpeech textToSpeech;
     private MediaPlayer player;
-    List<Palavra> palavras = new ArrayList<>();
+    private List<Palavra> palavras = new ArrayList<>();
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private JogoActivity jogoActivity;
-
     private String typeParam;
 
-    public JogoFragment() {}
+    public JogoFragment() {
+    }
 
 
     @Override
@@ -98,7 +98,7 @@ public class JogoFragment extends Fragment {
 
         player = MediaPlayer.create(getActivity(), R.raw.success);
 
-        new Thread(() -> fetchData(typeParam)).start();
+        new Thread(() -> JogoFragment.this.fetchData(typeParam)).start();
 
         textToSpeech = new TextToSpeech(getActivity(), status -> {
             if (status != TextToSpeech.ERROR) {
@@ -130,11 +130,8 @@ public class JogoFragment extends Fragment {
                     palavras.add(palavra);
                 }
                 ((JogoActivity) getActivity()).setPalavras(palavras);
-                try {
-                    setPalavra();
-                } catch (EndgameException e) {
-                    e.printStackTrace();
-                }
+                setPalavra();
+
             }
 
             @Override
@@ -144,17 +141,20 @@ public class JogoFragment extends Fragment {
 
     }
 
-    public void setPalavra() throws EndgameException {
+    public void setPalavra() {
         this.progressBar.setVisibility(View.VISIBLE);
         try {
             Palavra palavra = selectPalavra();
             setImagem(palavra);
+        } catch (EndgameException e) {
+            ((JogoActivity) getActivity()).encerrarPartida(true);
         } finally {
             this.progressBar.setVisibility(View.GONE);
         }
     }
 
-    public interface OnFragmentInteractionListener {}
+    public interface OnFragmentInteractionListener {
+    }
 
     @OnClick(R.id.botao_confirmar)
     public void confirmarWord() {
@@ -172,12 +172,7 @@ public class JogoFragment extends Fragment {
             this.jogoActivity.incrementarPontos();
             //tocar som de acerto
             player.start();
-            try {
-                setPalavra();
-            } catch (EndgameException e) {
-                Log.w("Fim de jogo", e.getMessage());
-                ((JogoActivity) getActivity()).encerrarPartida("Continue tentando!");
-            }
+            setPalavra();
         }
         limparPalavra();
     }
@@ -203,22 +198,28 @@ public class JogoFragment extends Fragment {
             Palavra palavra = palavras.get(posicao);
             palavras.remove(posicao);
             palavraAtual = palavra;
-            setImagem(palavra);
             this.jogoActivity.setPalavraAtual(palavraAtual);
             return palavra;
         }
     }
 
     private void setImagem(Palavra palavra) {
+        Log.i("", "Palavra: " + palavra.getTexto());
         StorageReference reference = FirebaseStorage.getInstance().getReference();
         StorageReference realImage = reference.child(palavra.getNomeArquivo());
         realImage.getBytes(1024 * 1024).addOnSuccessListener(bytes -> {
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            ImageView imageView = getView().findViewById(R.id.imagemPalavra);
+            ImageView imageView = JogoFragment.this.getView().findViewById(R.id.imagemPalavra);
             if (imageView != null) {
                 imageView.setImageBitmap(bitmap);
             }
+            bitmap = null;
+            System.gc();
+        }).addOnFailureListener(e -> {
+            Log.e("", "Erro na busca da imagem para palavra:" + palavra.getTexto());
+            setPalavra();
         });
+
     }
 
     public void setLetra(String letra) {

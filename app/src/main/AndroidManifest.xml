@@ -9,15 +9,16 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".PalavrinhasApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Fullscreen"
-        tools:node="replace">
-        <activity android:name=".activity.InstrucoesActivity"></activity>
+        tools:node="replace"
+        >
+
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="sensorLandscape">
@@ -42,6 +43,9 @@
         <activity
             android:name=".activity.MenuActivity"
             android:screenOrientation="sensorLandscape" />
+        <activity
+            android:name=".activity.InstrucoesActivity"
+            android:screenOrientation="sensorLandscape"/>
     </application>
 
 </manifest>

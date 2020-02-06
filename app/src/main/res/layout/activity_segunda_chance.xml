@@ -5,78 +5,99 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.SegundaChanceActivity"
-    android:background="#fffd82">
+    android:background="@color/background">
 
-    <Button
-        android:id="@+id/palavra1"
+
+    <fragment
+        android:id="@+id/teclado"
+        android:name="com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="108dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/button_radius"
-        android:onClick="getPalavraEscolhida"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="palavra 4" />
-
-    <Button
-        android:id="@+id/palavra2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/button_radius"
-        android:onClick="getPalavraEscolhida"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/palavra3"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:text="palavra 1" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        tools:layout="@layout/fragment_teclado" />
 
-    <Button
-        android:id="@+id/palavra3"
+    <TextView
+        android:id="@+id/palavra_correta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="88dp"
-        android:background="@drawable/button_radius"
-        android:onClick="getPalavraEscolhida"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/palavra1"
-        app:layout_constraintHorizontal_bias="0.313"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="palavra 3" />
-
-    <Button
-        android:id="@+id/palavra4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginBottom="8dp"
-        android:background="@drawable/button_radius"
-        android:onClick="getPalavraEscolhida"
-        android:text=""
-        app:layout_constraintBottom_toTopOf="@+id/palavra1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        tools:text="palavra 2" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="QUE TAL UMA SEGUNDA CHANCE? VOCÊ SÓ PRECISA ESCOLHER A PALAVRA QUE VOCÊ ERROU!"
+        android:text=""
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="PALAVRA" />
+
+    <TextView
+        android:id="@+id/palavra_usuario_segunda_chance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text=""
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/palavra_correta"
+        tools:text="PALAVRA 2" />
+
+    <Button
+        android:id="@+id/botao_confirmar_segunda_chance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="240dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_radius"
+        android:text="@string/confirmar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/teclado"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/botao_limpar_segunda_chance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_radius"
+        android:text="@string/limpar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toEndOf="@+id/teclado"
+        app:layout_constraintTop_toBottomOf="@+id/botao_confirmar_segunda_chance" />
+
+    <Button
+        android:id="@+id/botao_desistir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_radius"
+        android:text="@string/desistir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toEndOf="@+id/teclado"
+        app:layout_constraintTop_toBottomOf="@+id/botao_limpar_segunda_chance" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="180dp"
+        android:layout_height="167dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/image_vida_extra" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

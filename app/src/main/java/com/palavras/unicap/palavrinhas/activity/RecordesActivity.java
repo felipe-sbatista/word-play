@@ -35,7 +35,9 @@ public class RecordesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordes);
-        new Thread(() -> this.fetchData()).start();
+//        new Thread(() -> this.fetchData());
+        this.fetchData();
+
 
     }
 
@@ -54,8 +56,7 @@ public class RecordesActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
 
         });
     }
