@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.entity.Palavra;
@@ -43,12 +45,21 @@ public class SegundaChanceActivity extends AppCompatActivity
 
     private String resposta = "";
     private String palavraUsuario = "";
+    private FragmentManager fragmentManager = getSupportFragmentManager();
+    private Fragment tecladoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_segunda_chance);
         ButterKnife.bind(this);
+        //set Teclado Fragment
+        tecladoFragment = new TecladoAlfabeticoFragment();
+
+        // start fragments
+        androidx.fragment.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.add(R.id.teclado_jogo, tecladoFragment);
+        transaction.commitNow();
         resposta = getIntent().getStringExtra(Constantes.RESPOSTA_SEGUNDA_CHANCE).toUpperCase();
         textViewResposta.setText(resposta);
     }

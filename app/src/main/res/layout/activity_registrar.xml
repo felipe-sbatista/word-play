@@ -36,13 +36,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="216dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="212dp"
+        android:layout_marginEnd="156dp"
         android:background="@drawable/button_radius"
         android:text="@string/salvar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/teclado"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <Button
         android:id="@+id/botao_limpar_recordes"
@@ -50,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="156dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_radius"
         android:text="@string/limpar"
@@ -58,21 +59,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/teclado"
         app:layout_constraintTop_toBottomOf="@+id/botao_salvar"
-        app:layout_constraintVertical_bias="0.285" />
+        app:layout_constraintVertical_bias="0.137" />
 
-
-    <fragment
+    <androidx.appcompat.widget.ContentFrameLayout
         android:id="@+id/teclado"
-        android:name="com.palavras.unicap.palavrinhas.fragment.TecladoAlfabeticoFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:tag="teclado_fragment"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".5"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jo"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/life_jogo"
+        app:layout_constraintVertical_bias="0.058"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent=".5"
         tools:layout="@layout/fragment_teclado" />
 
     <ImageView

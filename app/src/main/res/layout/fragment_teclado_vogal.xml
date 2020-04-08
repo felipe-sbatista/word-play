@@ -2,322 +2,536 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".fragment.TecladoVogalFragment"
     android:background="@color/background">
 
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_begin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.07" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.376" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_second_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.27" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_third_middle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.48" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_second_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_third_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.99" />
+
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_first_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_second_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_third_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent=".75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_fourth_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="1.0" />
+
     <Button
         android:id="@+id/buttonA"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="A"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_first_line"
+        app:layout_constraintEnd_toStartOf="@+id/buttonE"
+        app:layout_constraintStart_toStartOf="@+id/guideline_begin"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
         android:id="@+id/buttonE"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
         android:background="@drawable/custom_button"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:text="E"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_first_line"
+        app:layout_constraintEnd_toStartOf="@+id/buttonI"
         app:layout_constraintStart_toEndOf="@+id/buttonA"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonB"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="4dp"
-        android:background="@drawable/custom_button"
-        android:clickable="true"
-        android:onClick="getClick"
-        android:text="B"
-        app:layout_constraintStart_toEndOf="@+id/buttonI"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonD"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:clickable="true"
-        android:onClick="getClick"
-        android:background="@drawable/custom_button"
-        android:text="D"
-        app:layout_constraintStart_toEndOf="@+id/buttonC"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonG"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:clickable="true"
-        android:onClick="getClick"
-        android:background="@drawable/custom_button"
-        android:text="G"
-        app:layout_constraintStart_toEndOf="@+id/buttonF"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonC"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:clickable="true"
-        android:onClick="getClick"
-        android:background="@drawable/custom_button"
-        android:text="C"
-        app:layout_constraintStart_toEndOf="@+id/buttonB"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonF"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
-        android:clickable="true"
-        android:onClick="getClick"
-        android:background="@drawable/custom_button"
-        android:text="F"
-        app:layout_constraintStart_toEndOf="@+id/buttonD"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buttonH"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="56dp"
-        android:clickable="true"
-        android:onClick="getClick"
-        android:background="@drawable/custom_button"
-        android:text="H"
-        app:layout_constraintStart_toEndOf="@+id/buttonU"
-        app:layout_constraintTop_toBottomOf="@+id/buttonB" />
 
     <Button
         android:id="@+id/buttonI"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="4dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="I"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_first_line"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_middle"
         app:layout_constraintStart_toEndOf="@+id/buttonE"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonO"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/custom_button"
+        android:clickable="true"
+        android:onClick="getClick"
+        android:padding="1dp"
+        android:text="O"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_second_line"
+        app:layout_constraintStart_toStartOf="@+id/guideline_begin"
+        app:layout_constraintEnd_toStartOf="@+id/buttonU"
+        app:layout_constraintTop_toBottomOf="@+id/buttonA" />
+
+
+    <Button
+        android:id="@+id/buttonU"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:onClick="getClick"
+        android:background="@drawable/custom_button"
+        android:text="U"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_second_line"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_second_middle"
+        app:layout_constraintStart_toEndOf="@+id/buttonO"
+        app:layout_constraintTop_toBottomOf="@+id/buttonE" />
+
+
+
+    <Button
+        android:id="@+id/buttonB"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_first_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/custom_button"
+        android:clickable="true"
+        android:onClick="getClick"
+        android:text="B"
+        app:layout_constraintStart_toEndOf="@+id/guideline_third_middle"
+        app:layout_constraintEnd_toStartOf="@+id/buttonC"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonC"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_first_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:onClick="getClick"
+        android:background="@drawable/custom_button"
+        android:text="C"
+        app:layout_constraintEnd_toStartOf="@+id/buttonD"
+        app:layout_constraintStart_toEndOf="@+id/buttonB"
         app:layout_constraintTop_toTopOf="parent" />
 
 
     <Button
+        android:id="@+id/buttonD"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_first_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:onClick="getClick"
+        android:background="@drawable/custom_button"
+        android:text="D"
+        app:layout_constraintEnd_toStartOf="@+id/buttonF"
+        app:layout_constraintStart_toEndOf="@+id/buttonC"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonF"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_first_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:onClick="getClick"
+        android:background="@drawable/custom_button"
+        android:text="F"
+        app:layout_constraintEnd_toStartOf="@+id/buttonG"
+        app:layout_constraintStart_toEndOf="@+id/buttonD"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/buttonG"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_first_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clickable="true"
+        android:onClick="getClick"
+        android:background="@drawable/custom_button"
+        android:text="G"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_second_end"
+        app:layout_constraintStart_toEndOf="@+id/buttonF"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <Button
+        android:id="@+id/buttonH"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_second_line"
+        android:clickable="true"
+        android:onClick="getClick"
+        android:background="@drawable/custom_button"
+        android:text="H"
+        app:layout_constraintEnd_toStartOf="@+id/buttonJ"
+        app:layout_constraintStart_toEndOf="@+id/guideline_middle"
+        app:layout_constraintTop_toBottomOf="@+id/buttonB" />
+
+
+
+    <Button
         android:id="@+id/buttonJ"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_second_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:padding="4dp"
         android:text="J"
+        app:layout_constraintEnd_toStartOf="@+id/buttonK"
         app:layout_constraintStart_toEndOf="@+id/buttonH"
         app:layout_constraintTop_toBottomOf="@+id/buttonC" />
 
     <Button
         android:id="@+id/buttonK"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_second_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="K"
+        app:layout_constraintEnd_toStartOf="@+id/buttonL"
         app:layout_constraintStart_toEndOf="@+id/buttonJ"
         app:layout_constraintTop_toBottomOf="@+id/buttonD" />
 
     <Button
         android:id="@+id/buttonL"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_second_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="L"
+        app:layout_constraintEnd_toStartOf="@+id/buttonM"
         app:layout_constraintStart_toEndOf="@+id/buttonK"
         app:layout_constraintTop_toBottomOf="@+id/buttonF" />
 
     <Button
         android:id="@+id/buttonM"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_second_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="M"
+        app:layout_constraintEnd_toStartOf="@+id/buttonN"
         app:layout_constraintStart_toEndOf="@+id/buttonL"
         app:layout_constraintTop_toBottomOf="@+id/buttonF" />
 
 
     <Button
         android:id="@+id/buttonN"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_second_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="N"
         app:layout_constraintStart_toEndOf="@+id/buttonM"
-        app:layout_constraintTop_toBottomOf="@+id/buttonG" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonG"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_third_end"/>
 
-    <Button
-        android:id="@+id/buttonO"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="56dp"
-        android:background="@drawable/custom_button"
-        android:clickable="true"
-        android:onClick="getClick"
-        android:padding="1dp"
-        android:text="O"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonA" />
 
     <Button
         android:id="@+id/buttonP"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="224dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_third_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/custom_button"
         android:clickable="true"
         android:onClick="getClick"
         android:text="P"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonQ"
+        app:layout_constraintStart_toEndOf="@+id/guideline_middle"
         app:layout_constraintTop_toBottomOf="@+id/buttonH" />
 
     <Button
         android:id="@+id/buttonQ"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_third_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:padding="1dp"
         android:text="Q"
+        app:layout_constraintEnd_toStartOf="@+id/buttonR"
         app:layout_constraintStart_toEndOf="@+id/buttonP"
         app:layout_constraintTop_toBottomOf="@+id/buttonJ" />
 
     <Button
         android:id="@+id/buttonR"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_third_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="R"
+        app:layout_constraintEnd_toStartOf="@+id/buttonS"
         app:layout_constraintStart_toEndOf="@+id/buttonQ"
         app:layout_constraintTop_toBottomOf="@+id/buttonK" />
 
     <Button
         android:id="@+id/buttonS"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_third_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="S"
+        app:layout_constraintEnd_toStartOf="@+id/buttonT"
         app:layout_constraintStart_toEndOf="@+id/buttonR"
         app:layout_constraintTop_toBottomOf="@+id/buttonL" />
 
     <Button
         android:id="@+id/buttonT"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_third_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="T"
+        app:layout_constraintEnd_toStartOf="@+id/buttonV"
         app:layout_constraintStart_toEndOf="@+id/buttonS"
         app:layout_constraintTop_toBottomOf="@+id/buttonM" />
 
-    <Button
-        android:id="@+id/buttonU"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-
-        android:clickable="true"
-        android:onClick="getClick"
-        android:background="@drawable/custom_button"
-        android:text="U"
-        app:layout_constraintStart_toEndOf="@+id/buttonO"
-        app:layout_constraintTop_toBottomOf="@+id/buttonE" />
 
     <Button
         android:id="@+id/buttonV"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_third_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="V"
         app:layout_constraintStart_toEndOf="@+id/buttonT"
-        app:layout_constraintTop_toBottomOf="@+id/buttonN" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonN"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_third_end"/>
+
+
+
 
     <Button
         android:id="@+id/buttonW"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-
-        android:layout_marginStart="280dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_fourth_line"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@+id/guideline_third_middle"
         android:background="@drawable/custom_button"
         android:clickable="true"
         android:onClick="getClick"
         android:text="W"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/buttonX"
         app:layout_constraintTop_toBottomOf="@+id/buttonQ" />
 
     <Button
         android:id="@+id/buttonX"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_fourth_line"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
 
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="X"
+        app:layout_constraintEnd_toStartOf="@+id/buttonY"
         app:layout_constraintStart_toEndOf="@+id/buttonW"
         app:layout_constraintTop_toBottomOf="@+id/buttonR" />
 
     <Button
         android:id="@+id/buttonY"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_fourth_line"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="Y"
         app:layout_constraintStart_toEndOf="@+id/buttonX"
+        app:layout_constraintEnd_toStartOf="@+id/buttonZ"
         app:layout_constraintTop_toBottomOf="@+id/buttonS" />
 
     <Button
         android:id="@+id/buttonZ"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline_fourth_line"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeMaxTextSize="30sp"
+        app:autoSizeTextType="uniform"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:clickable="true"
         android:onClick="getClick"
         android:background="@drawable/custom_button"
         android:text="Z"
         app:layout_constraintStart_toEndOf="@+id/buttonY"
-        app:layout_constraintTop_toBottomOf="@+id/buttonT" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonT"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_end"/>
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
