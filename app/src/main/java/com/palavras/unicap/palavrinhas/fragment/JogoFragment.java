@@ -37,7 +37,9 @@ import com.palavras.unicap.palavrinhas.util.Constantes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -71,8 +73,7 @@ public class JogoFragment extends Fragment {
     private JogoActivity jogoActivity;
     private String typeParam;
 
-    public JogoFragment() {
-    }
+    public JogoFragment() {}
 
 
     @Override
@@ -95,6 +96,7 @@ public class JogoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_jogo, container, false);
+        ButterKnife.bind(this, view);
 
         player = MediaPlayer.create(getActivity(), R.raw.success);
 
@@ -106,9 +108,6 @@ public class JogoFragment extends Fragment {
                 textToSpeech.setSpeechRate((float) 0.5);
             }
         });
-
-        ButterKnife.bind(this, view);
-
         return view;
     }
 
@@ -120,29 +119,23 @@ public class JogoFragment extends Fragment {
         //Seleciona o grupo dos dados pela referencia
         this.databaseReference = database.getReference(Constantes.PALAVRAS_REFERENCE).child(url);
         Query query = databaseReference.orderByChild(url);
-
+        this.progressBar.setVisibility(View.VISIBLE);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //iteração dos dados ja buscados
-                for (DataSnapshot singleSnapshot : dataSnapshot.getChildren()) {
-                    Palavra palavra = singleSnapshot.getValue(Palavra.class);
-                    palavras.add(palavra);
-                }
+                dataSnapshot.getChildren().forEach(e -> palavras.add(e.getValue(Palavra.class)));
                 ((JogoActivity) getActivity()).setPalavras(palavras);
                 setPalavra();
-
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
 
     }
 
     public void setPalavra() {
-        this.progressBar.setVisibility(View.VISIBLE);
         try {
             Palavra palavra = selectPalavra();
             setImagem(palavra);
@@ -190,17 +183,17 @@ public class JogoFragment extends Fragment {
 
 
     private Palavra selectPalavra() throws EndgameException {
-        if (palavras.size() == 0) {
+        if (palavras.isEmpty()) {
             throw new EndgameException("Sem mais palavras");
-        } else {
-            Random random = new Random();
-            int posicao = random.nextInt(palavras.size());
-            Palavra palavra = palavras.get(posicao);
-            palavras.remove(posicao);
-            palavraAtual = palavra;
-            this.jogoActivity.setPalavraAtual(palavraAtual);
-            return palavra;
         }
+        Random random = new Random();
+        int posicao = random.nextInt(palavras.size());
+        Palavra palavra = palavras.get(posicao);
+
+        palavras.remove(posicao);
+        palavraAtual = palavra;
+        this.jogoActivity.setPalavraAtual(palavraAtual);
+        return palavra;
     }
 
     private void setImagem(Palavra palavra) {
@@ -209,11 +202,10 @@ public class JogoFragment extends Fragment {
         StorageReference realImage = reference.child(palavra.getNomeArquivo());
         realImage.getBytes(1024 * 1024).addOnSuccessListener(bytes -> {
             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-            ImageView imageView = JogoFragment.this.getView().findViewById(R.id.imagemPalavra);
-            if (imageView != null) {
+            ImageView imageView = Objects.requireNonNull(JogoFragment.this.getView()).findViewById(R.id.imagemPalavra);
+            if (imageView != null)
                 imageView.setImageBitmap(bitmap);
-            }
-            bitmap = null;
+
             System.gc();
         }).addOnFailureListener(e -> {
             Log.e("", "Erro na busca da imagem para palavra:" + palavra.getTexto());

@@ -35,10 +35,6 @@ public class RecordesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordes);
-//        new Thread(() -> this.fetchData());
-        this.fetchData();
-
-
     }
 
     private void fetchData() {

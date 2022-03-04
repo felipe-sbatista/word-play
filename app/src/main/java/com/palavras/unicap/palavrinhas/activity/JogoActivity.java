@@ -115,6 +115,8 @@ public class JogoActivity extends AppCompatActivity implements
         finish();
     }
 
+
+
 //    @OnClick(R.id.switch_teclado)
     public void switchTeclado(View view) {
         new Thread(() -> {

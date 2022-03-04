@@ -3,10 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.palavras.unicap.palavrinhas">
 
+    <permission
+        android:name="com.app.appname.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.app.appname.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
     <application
         android:name=".PalavrinhasApplication"
@@ -16,7 +22,6 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Fullscreen"
-        tools:node="replace"
         >
 
         <activity
