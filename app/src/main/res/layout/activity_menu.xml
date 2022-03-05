@@ -7,82 +7,87 @@
     tools:context=".activity.MenuActivity"
     android:background="@color/background">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/first_line_v_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/second_line_v_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/first_line_h_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.33" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/second_line_h_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.66" />
+
     <Button
         android:id="@+id/topico1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginBottom="108dp"
         android:background="@drawable/button_radius"
         android:onClick="selectTypeOfWords"
         android:text="Palavras com R e RR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topico5"
-         />
+        app:layout_constraintEnd_toStartOf="@+id/second_line_v_menu"
+        app:layout_constraintTop_toTopOf="@+id/second_line_h_menu" />
 
     <Button
         android:id="@+id/topico2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="8dp"
         android:background="@drawable/button_radius"
         android:onClick="selectTypeOfWords"
         android:text="Palavras com B e D"
-        app:layout_constraintEnd_toStartOf="@+id/topico4"
-        app:layout_constraintHorizontal_bias="0.047"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/first_line_h_menu"
+        app:layout_constraintStart_toStartOf="@+id/first_line_v_menu" />
 
     <Button
         android:id="@+id/topico3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="124dp"
         android:background="@drawable/button_radius"
         android:onClick="selectTypeOfWords"
         android:text="Palavras com A &amp; E"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/topico1"
-        app:layout_constraintHorizontal_bias="0.426"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topico5"
-         />
+        app:layout_constraintStart_toStartOf="@+id/first_line_v_menu"
+        app:layout_constraintTop_toTopOf="@+id/second_line_h_menu" />
 
     <Button
         android:id="@+id/topico4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:layout_marginEnd="96dp"
         android:background="@drawable/button_radius"
         android:onClick="selectTypeOfWords"
         android:text="Palavras com R no final"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/first_line_h_menu"
+        app:layout_constraintEnd_toStartOf="@+id/second_line_v_menu" />
 
     <Button
         android:id="@+id/topico5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/button_radius"
         android:onClick="selectTypeOfWords"
         android:text="Palavras com P e B"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/second_line_h_menu"
+        app:layout_constraintEnd_toStartOf="@+id/second_line_v_menu"
         app:layout_constraintHorizontal_bias="0.499"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/first_line_v_menu"
+        app:layout_constraintTop_toTopOf="@+id/first_line_h_menu"
         app:layout_constraintVertical_bias="0.458" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

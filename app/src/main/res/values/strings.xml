@@ -10,5 +10,8 @@
     <string name="confirmar">Confirmar</string>
     <string name="desistir">DESISTIR</string>
     <string name="Finalizar">Finalizar</string>
+    <string name="recordes">Recordes</string>
+    <string name="instrucoes">Instruções</string>
+    <string name="jogar">Jogar</string>
 
 </resources>

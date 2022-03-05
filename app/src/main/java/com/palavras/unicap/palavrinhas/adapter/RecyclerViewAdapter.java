@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.palavras.unicap.palavrinhas.R;
 import com.palavras.unicap.palavrinhas.entity.Usuario;
+import com.palavras.unicap.palavrinhas.entity.UsuarioDB;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<Usuario> usuarios = new ArrayList<>();
+    private List<UsuarioDB> usuarios;
     private Context context;
 
-    public RecyclerViewAdapter(List<Usuario> usuarios, Context context) {
+    public RecyclerViewAdapter(List<UsuarioDB> usuarios, Context context) {
         this.usuarios = usuarios;
         this.context = context;
     }
@@ -34,11 +35,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Usuario usuario = usuarios.get(position);
-        holder.viewNome.setText(usuario.getNome());
-        holder.viewTempo.setText(usuario.getSegundos()+ " segundos");
-        holder.viewPontos.setText(usuario.getPontos() + " pontos");
-
+        UsuarioDB usuario = usuarios.get(position);
+        holder.viewNome.setText(usuario.nome);
+        holder.viewPontos.setText(usuario.pontuacao+ " pontos");
     }
 
     @Override
